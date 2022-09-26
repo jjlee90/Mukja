@@ -1,0 +1,28 @@
+.logo {
+  display: flex;
+  justify-content: start;
+  width: 5em;
+}
+
+.search-container {
+  margin-top: 1.5em;
+  max-height: 15vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  form {
+    display: flex;
+    justify-content: space-between;
+
+    input {
+      padding: 0 3em;
+      gap: 5em;
+      height: 3em;
+    }
+  }
+  button {
+    height: 3em;
+    padding: 0 1em;
+  }
+}
