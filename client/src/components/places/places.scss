@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.places-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.card-container {
+  max-width: 50%;
+}
+// Places card container
+.card {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  padding: 1rem;
+  border: black solid 1px;
+  p {
+    font-size: 2rem;
+    margin: auto;
+  }
+  .holder {
+    width: 25%;
+  }
+}
+
+.map {
+  height: 100%;
+  width: 100%;
+}
+
+.map-container {
+  flex: 1;
+}
+
+.location-icon {
+  font-size: 2rem;
+  color: white;
+  background-color: red;
+  border: black solid 1px;
+  border-radius: 30%;
+}
