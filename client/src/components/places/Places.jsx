@@ -12,6 +12,8 @@ export default function Places() {
     const fetchFoods = async () => {
       setLoading(true)
       const res = await fetch("https://pokeapi.co/api/v2/pokemon/ditto")
+      // "https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=food&location=-33.8670522%2C151.1957362&radius=500&key=AIzaSyBBCTOjiUO1KXaskE4mQnQkHLpf2LAlCMw"
+
       const { abilities } = await res.json()
 
       setFoodData(abilities)

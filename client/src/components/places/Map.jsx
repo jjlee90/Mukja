@@ -14,13 +14,14 @@ Map.defaultProps = {
 }
 export default function Map({ foodData, center, zoom }) {
   // const markers = foodData.map()
-
+  console.log(foodData)
   return (
     <div className="map">
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY }}
         defaultCenter={center}
         defaultZoom={zoom}
+        yesIWantToUseGoogleMapApiInternals
       >
         <LocationMarker lat={center.lat} lng={center.lng} />
       </GoogleMapReact>
