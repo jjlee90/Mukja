@@ -68,8 +68,8 @@ export default function SearchBar(props) {
           </form>
         </div>
         <div>
-          <button>Sign Up</button>
-          <button>Login</button>
+          <button onClick={() => navigate("/account/signup")}>Sign Up</button>
+          <button onClick={() => navigate("/account/login")}>Login</button>
         </div>
       </div>
     </div>
