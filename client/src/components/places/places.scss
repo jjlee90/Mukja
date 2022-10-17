@@ -29,12 +29,18 @@
 }
 
 .map {
-  height: 100%;
-  width: 100%;
+  display: flex;
 }
 
 .map-container {
-  flex: 1;
+  display: flex;
+}
+
+.leaflet-container {
+  position: absolute;
+  display: flex;
+  width: 45%;
+  height: 76%;
 }
 
 .location-icon {

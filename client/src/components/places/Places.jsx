@@ -2,27 +2,26 @@ import { useState, useEffect } from "react"
 import Map from "./Map"
 import holder from "../../images/logo.png"
 import Loader from "../loader/Loader"
+import SearchBar from "../search/SearchBar"
 
 export default function Places() {
   // usestate to set fetched food data
+  const [formInput, setFormInput] = useState([])
   const [foodData, setFoodData] = useState([])
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    const fetchFoods = async () => {
+    async function fetchFoods() {
       setLoading(true)
-      const res = await fetch("https://pokeapi.co/api/v2/pokemon/ditto")
-      // "https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=food&location=-33.8670522%2C151.1957362&radius=500&key=AIzaSyBBCTOjiUO1KXaskE4mQnQkHLpf2LAlCMw"
-
-      const { abilities } = await res.json()
-
-      setFoodData(abilities)
-
+      let res = await fetch("http://localhost:3000/places")
+      let data = await res.json()
+      console.log({ data })
+      setFoodData((prev) => ({ ...prev, ...data.businesses[0] }))
+      console.log(foodData)
       setLoading(false)
     }
 
     fetchFoods()
-    console.log(foodData)
   }, [])
 
   return (
