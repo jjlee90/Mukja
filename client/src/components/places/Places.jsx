@@ -11,20 +11,24 @@ export default function Places() {
   useEffect(() => {
     const fetchFoods = async () => {
       setLoading(true)
-      const res = await fetch("https://pokeapi.co/api/v2/pokemon/ditto")
-      // "https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=food&location=-33.8670522%2C151.1957362&radius=500&key=AIzaSyBBCTOjiUO1KXaskE4mQnQkHLpf2LAlCMw"
+      let res = await fetch("http://localhost:3000/api/yelp") 
 
-      const { abilities } = await res.json()
-
-      setFoodData(abilities)
-
+      if (!res.ok) {
+        const message = `An error occurred: ${res.statusText}`
+        window.alert(message)
+        return
+      }
+      let data = await res.json()
+      //console.log({ data })
+      setFoodData({data})
+      console.log(foodData)
       setLoading(false)
     }
 
     fetchFoods()
-    console.log(foodData)
-  }, [])
 
+  }, [])
+function sortPlaces() {}
   return (
     <div className="container">
       <h3>Places</h3>
