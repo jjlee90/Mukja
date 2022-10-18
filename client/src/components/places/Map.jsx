@@ -14,7 +14,7 @@ Map.defaultProps = {
 }
 export default function Map({ foodData, center, zoom }) {
   // const markers = foodData.map()
-  console.log(foodData)
+ // console.log(foodData)
   return (
     <div className="map">
       <GoogleMapReact
