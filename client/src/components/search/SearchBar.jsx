@@ -4,6 +4,7 @@ import logo from "../../images/logo.png"
 import "./searchbar.scss"
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import Login from "../login/Login"
 
 export default function SearchBar(props) {
   const navigate = useNavigate()
@@ -69,7 +70,7 @@ export default function SearchBar(props) {
         </div>
         <div>
           <button>Sign Up</button>
-          <button>Login</button>
+          <Login />
         </div>
       </div>
     </div>
