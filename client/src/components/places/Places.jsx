@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react"
 import Map from "./Map"
-import holder from "../../images/logo.png"
+import Card from "./PlacesCard"
 import Loader from "../loader/Loader"
+import PlaceCard from "./PlacesCard"
 
 export default function Places() {
   // usestate to set fetched food data
-  const [foodData, setFoodData] = useState([])
+  const [foodData, setFoodData] = useState({})
   const [loading, setLoading] = useState(false)
-
+  let data = undefined
   useEffect(() => {
     const fetchFoods = async () => {
-      setLoading(true)
+      setLoading(true)//
       let res = await fetch("http://localhost:3000/api/yelp") 
 
       if (!res.ok) {
@@ -18,46 +19,40 @@ export default function Places() {
         window.alert(message)
         return
       }
-      let data = await res.json()
+      data = await res.json()
       //console.log({ data })
-      setFoodData({data})
-      console.log(foodData)
+      
+      
       setLoading(false)
+      return data
+      //console.log(data.businesses[0])
     }
-
-    fetchFoods()
-
+    fetchFoods().then(data => {
+      setFoodData(data)
+      console.log(foodData)
+    })
+    
   }, [])
-function sortPlaces() {}
   return (
     <div className="container">
       <h3>Places</h3>
       <div className="places-container">
         <div className="card-container">
-          <div className="card">
-            <img src={holder} alt="place-placeholder" className="holder" />
-            <div>
-              <p>Wendy's</p>
-              <p>3.8 *** (521)</p>
-              <p>555 College Ave</p>
-            </div>
-          </div>
-          <div className="card">
-            <img src={holder} alt="place-placeholder" className="holder" />
-            <div>
-              <p>Wendy's</p>
-              <p>3.8 *** (521)</p>
-              <p>555 College Ave</p>
-            </div>
-          </div>
-          <div className="card">
-            <img src={holder} alt="place-placeholder" className="holder" />
-            <div>
-              <p>Wendy's</p>
-              <p>3.8 *** (521)</p>
-              <p>555 College Ave</p>
-            </div>
-          </div>
+          <PlaceCard
+          name={foodData.businesses[0].name}
+          image={foodData.businesses[0].image_url}
+          address={foodData.businesses[0].location.address1}
+          />
+          <PlaceCard
+          name={foodData.businesses[1].name}
+          image={foodData.businesses[1].image_url}
+          address={foodData.businesses[1].location.address1}
+          />
+          <PlaceCard
+          name={foodData.businesses[2].name}
+          image={foodData.businesses[2].image_url}
+          address={foodData.businesses[2].location.address1}
+          />
         </div>
         <div className="map-container">
           {!loading ? <Map foodData={foodData} /> : <Loader />}
