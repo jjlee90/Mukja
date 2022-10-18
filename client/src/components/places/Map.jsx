@@ -11,6 +11,8 @@ Map.defaultProps = {
   zoom: 6,
 }
 export default function Map({ foodData, center, zoom }) {
+  // const markers = foodData.map()
+  // console.log(foodData)
   return (
     <div className="map">
       <MapContainer center={[51.505, -0.09]} zoom={6} scrollWheelZoom={false}>
