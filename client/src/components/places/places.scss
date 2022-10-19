@@ -10,7 +10,7 @@
 }
 
 .card-container {
-  max-width: 50%;
+  max-width: 30%;
 }
 // Places card container
 .card {
@@ -20,7 +20,7 @@
   padding: 1rem;
   border: black solid 1px;
   p {
-    font-size: 2rem;
+    font-size: 1rem;
     margin: auto;
   }
   .holder {
@@ -38,9 +38,9 @@
 
 .leaflet-container {
   position: absolute;
-  display: flex;
-  width: 45%;
-  height: 76%;
+  z-index: 0;
+  width: 65%;
+  height: 70%;
 }
 
 .location-icon {
@@ -49,4 +49,27 @@
   background-color: red;
   border: black solid 1px;
   border-radius: 30%;
+}
+
+.reviews {
+  position: absolute;
+  z-index: 1;
+  background-color: white;
+  margin: 0.5em;
+  width: 25%;
+  padding-left: 1em;
+}
+
+.ratings {
+  margin-top: 1em;
+  display: inline-flex;
+  gap: 0.5em;
+}
+
+.summary {
+  display: inline-flex;
+  gap: 1em;
+  button {
+    margin: 0;
+  }
 }

@@ -21,7 +21,7 @@ export default function Login() {
       </button>
     )
   }
-
+  console.log(user)
   return (
     <div>
       {

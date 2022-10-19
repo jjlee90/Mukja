@@ -69,7 +69,7 @@ export default function SearchBar(props) {
           </form>
         </div>
         <div>
-          <button>Sign Up</button>
+          {/* <button>Sign Up</button> */}
           <Login />
         </div>
       </div>

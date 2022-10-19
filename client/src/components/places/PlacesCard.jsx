@@ -1,6 +1,17 @@
 import React from "react"
+import "./places.scss"
 
-export default function PlaceCard({ image, name, address, phone }) {
+export default function PlaceCard({
+  image,
+  name,
+  url,
+  is_closed,
+  review_count,
+  category,
+  rating,
+  address,
+  phone,
+}) {
   // console.log(name)
   return (
     <div className="card">
