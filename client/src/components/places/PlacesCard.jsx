@@ -11,10 +11,12 @@ export default function PlaceCard({
   rating,
   address,
   phone,
+  index,
+  setSelectedRestaurant,
 }) {
   // console.log(name)
   return (
-    <div className="card">
+    <div className="card" onClick={() => setSelectedRestaurant(index)}>
       <img src={image} alt="place image" className="holder" />
       <div>
         <p>{name}</p>
