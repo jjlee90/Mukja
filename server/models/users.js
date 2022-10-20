@@ -11,5 +11,5 @@ module.exports = (sequelize, Sequelize) => {
       }
     });
   
-    return Review;
+    return Users;
   };
