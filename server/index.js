@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }))
 // app.use(bodyParser.json())
 app.use(express.json())
 
-const db = require('./models')
+const db = require('./models/index.db')
 
 db.sequelize.sync({force: true}) // delete force obj after dev. it drops all tables then recreates them.
     .then(()=>{
@@ -25,7 +25,7 @@ db.sequelize.sync({force: true}) // delete force obj after dev. it drops all tab
     .catch((err) => {
         console.log("Couldn't sync db: " + err.message)
     })
-    
+
 const apiController = require("./controllers/api_controller.js")
 app.use("/api", apiController)
 require("./routes/review.routes")(app)
