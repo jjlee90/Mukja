@@ -5,6 +5,7 @@ import "./searchbar.scss"
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Login from "../login/Login"
+import { useEffect } from "react"
 
 export default function SearchBar(props) {
   const navigate = useNavigate()
@@ -22,14 +23,30 @@ export default function SearchBar(props) {
         [e.target.name]: e.target.value,
       }
     })
-    console.log(formData)
   }
 
-  function handleClick(e) {
+  useEffect(() => {})
+
+  async function handleClick(e) {
     e.preventDefault()
-    navigate("/places")
-  }
 
+    const data = { ...formData }
+
+    let rest = await fetch("http://localhost:3000/api/location", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+    let results = await rest.json()
+    console.log(results)
+    props.setData(results.businesses)
+
+    navigate("/places")
+    // navigate("/location")
+  }
+  console.log(props.data)
   return (
     <div>
       <div className="search-container">
