@@ -7,7 +7,9 @@ import { useState } from "react"
 
 function App() {
   const [data, setData] = useState([])
+  console.log(setData)
   console.log(data)
+
   return (
     <div className="App">
       <SearchBar setData={setData} />

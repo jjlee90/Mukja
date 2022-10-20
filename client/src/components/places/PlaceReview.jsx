@@ -20,29 +20,27 @@ export default function PlaceReview({
   return (
     <div className="reviews">
       <div>
-        <div>
-          <h3>{name}</h3>
-          <button src={url}>Website</button>
-        </div>
-        <div className="ratings">
-          {ratings}
-          <DynamicStar
-            width={15}
-            height={15}
-            rating={ratings}
-            emptyStarColor={"#D3D3D3"}
-          />
-          {review_count}
-        </div>
-        <p>
-          {price} • {categories}
-        </p>
-
-        <p>Hours: {{ is_closed } ? "Open" : "Closed"}</p>
-        <p>{category}</p>
-        <p>Address: {address}</p>
-        <p>Phone: {phone}</p>
+        <h3>{name}</h3>
+        <button src={url}>Website</button>
       </div>
+      <div className="ratings">
+        {ratings}
+        <DynamicStar
+          width={15}
+          height={15}
+          rating={ratings}
+          emptyStarColor={"#D3D3D3"}
+        />
+        {review_count}
+      </div>
+      <p>
+        {price} • {categories}
+      </p>
+
+      <p>Hours: {{ is_closed } ? "Open" : "Closed"}</p>
+      <p>{category}</p>
+      <p>Address: {address}</p>
+      <p>Phone: {phone}</p>
 
       <div>
         <div className="summary">

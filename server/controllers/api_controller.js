@@ -33,7 +33,7 @@ api.post("/location", (req, res) => {
 
   async function get_rest() {
     let rest = await fetch(
-      `https://api.yelp.com/v3/businesses/search?=food&location=${location}&limit=10`,
+      `https://api.yelp.com/v3/businesses/search?=food&location=${location}&limit=3`,
       {
         headers: {
           Authorization: `Bearer ${process.env.YELP_API_KEY}`,

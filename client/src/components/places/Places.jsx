@@ -3,7 +3,8 @@ import Map from "./Map"
 import Loader from "../loader/Loader"
 import PlaceCard from "./PlacesCard"
 import PlaceReview from "./PlaceReview"
-
+import Popup from "reactjs-popup"
+import "reactjs-popup/dist/index.css"
 export default function Places(props) {
   // usestate to set fetched food data
 
@@ -44,22 +45,23 @@ export default function Places(props) {
       />
     )
   }
-  // console.log(foodData[0])
+  console.log(foodData[0])
+  console.log(selectedRestaurant)
+
   return (
     <div className="container">
       <h3>Places</h3>
       <div className="places-container">
-        <div
-          className="card-container"
-          onClick={() => {
-            console.log(foodData.name)
-          }}
-        >
-          {foodData.length !== 0 ? mapData : ""}
+        <div className="card-container">
+          <Popup
+            trigger={<div>{foodData.length !== 0 ? mapData : ""}</div>}
+            position="right"
+          >
+            <div className="rev-cont">{foodData.length > 0 && mapReview()}</div>
+          </Popup>
         </div>
         <div className="map-container">
-          {!loading ? <Map foodData={foodData} /> : <Loader />}
-          {foodData.length > 0 && mapReview()}
+          {foodData.length !== 0 ? <Map foodData={foodData} /> : <Loader />}
         </div>
       </div>
     </div>
