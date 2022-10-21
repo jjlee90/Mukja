@@ -6,7 +6,11 @@ import { Routes, Route } from "react-router-dom"
 import { useState } from "react"
 
 function App() {
+  // Place data from yelp fetched from ./components/search
+  // pass data and center to ./components/places/Places
   const [data, setData] = useState([])
+
+  // setting center using fetched data
   const [defaultCenter, setDefaultCenter] = useState([])
 
   return (

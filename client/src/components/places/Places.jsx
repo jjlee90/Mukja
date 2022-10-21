@@ -8,17 +8,25 @@ import "reactjs-popup/dist/index.css"
 export default function Places(props) {
   // usestate to set fetched food data
 
+  // set food data from ../search/SearchBar
   const [foodData, setFoodData] = useState([])
   const [loading, setLoading] = useState(false)
+
+  // track PlaceCard on click based on index e.g. foodData[0]
   const [selectedRestaurant, setSelectedRestaurant] = useState(0)
+
+  // center point used to render map
   const [defaultCenter, setDefaultcenter] = useState([])
 
+  // setting data from SearchBar
   useEffect(() => {
     setFoodData(props.data)
     setDefaultcenter(props.defaultCenter)
   })
 
   console.log(defaultCenter)
+
+  // map data to create PlaceCards. Used as trigger to Popup ./PlaceReview.jsx
   let mapData = foodData.map((place, index) => {
     return (
       <PlaceCard
@@ -31,6 +39,7 @@ export default function Places(props) {
       />
     )
   })
+
   function mapReview() {
     return (
       <PlaceReview

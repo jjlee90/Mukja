@@ -1,20 +1,21 @@
+import React, { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import Login from "../login/Login"
 import { AiOutlineSearch } from "react-icons/ai"
 import { FaUserCircle } from "react-icons/fa"
 import logo from "../../images/logo.png"
 import "./searchbar.scss"
-import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import Login from "../login/Login"
-import { useEffect } from "react"
 
 export default function SearchBar(props) {
   const navigate = useNavigate()
 
+  // form inputs to create url string for yelp API
   const [formData, setFormData] = useState({
     search: "",
     location: "",
   })
 
+  // listen and handle changes in <form>
   function handleChange(e) {
     e.preventDefault()
     setFormData((prevFormData) => {
@@ -25,8 +26,7 @@ export default function SearchBar(props) {
     })
   }
 
-  useEffect(() => {})
-
+  // POST req, create url string using form data
   async function handleClick(e) {
     e.preventDefault()
 
@@ -44,7 +44,6 @@ export default function SearchBar(props) {
     props.setData(results.businesses)
     props.setDefaultCenter(results.region.center)
     navigate("/places")
-    // navigate("/location")
   }
 
   return (

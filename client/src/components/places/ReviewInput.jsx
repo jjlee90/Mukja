@@ -1,13 +1,22 @@
 import React, { useState } from "react"
+
+// create pop ups. used for leave a review button
 import Popup from "reactjs-popup"
 import "reactjs-popup/dist/index.css"
+
+// display fraction of a star based on number value
 import { DynamicStar } from "react-dynamic-star"
 import "./places.scss"
 
-export default function ReviewInput({ name }) {
-  const [formInput, setFormInput] = useState({ comments: "" })
-  const [review, setReview] = useState({})
+export default function ReviewInput({ name, address, setCreateReview }) {
+  // input fields for post request /api/reviews
+  const [formInput, setFormInput] = useState({
+    content: "",
+    rating: null,
+    address: address,
+  })
 
+  // event handler to handle changes input fields
   function handleChange(e) {
     e.preventDefault()
     setFormInput((prevFormData) => {
@@ -20,7 +29,8 @@ export default function ReviewInput({ name }) {
 
     const data = { ...formInput }
 
-    let rest = await fetch("http://localhost:3000/api/comment", {
+    // post request, create review with form data
+    let rest = await fetch("http://localhost:3000/api/reviews", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -30,29 +40,39 @@ export default function ReviewInput({ name }) {
     let results = await rest.json()
     console.log(results)
 
-    setReview(results)
-
-    // navigate("/location")
+    // passing results to  ./PlaceReview.jsx
+    setCreateReview(results)
   }
-  console.log(review)
-  console.log(formInput)
+
   return (
     <div className="review-input">
       <Popup trigger={<button>Leave a Review</button>} position="right center">
         <h3>{name}</h3>
+        <p>{address}</p>
         <p>Username</p>
         <p>
           <DynamicStar width={15} height={15} emptyStarColor={"#D3D3D3"} />
         </p>
         <form onClick={handleClick}>
-          <textarea
-            type="text"
-            name="comments"
-            value={formInput.value}
-            placeholder="How was your experience here?"
-            id="comments"
-            onChange={handleChange}
-          />
+          <label htmlFor="rating">
+            <input
+              type="number"
+              name="rating"
+              id="rating"
+              max="5"
+              onChange={handleChange}
+            />
+          </label>
+          <label htmlFor="content">
+            <textarea
+              type="text"
+              name="content"
+              value={formInput.value}
+              placeholder="How was your experience here?"
+              id="content"
+              onChange={handleChange}
+            />
+          </label>
           <button>Cancel</button>
           <button>Post</button>
         </form>

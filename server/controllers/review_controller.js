@@ -18,6 +18,7 @@ exports.create = (req, res) => {
 
   Review.create(review)
     .then((data) => {
+      console.log(data)
       res.send(data)
     })
     .catch((err) => {
@@ -50,6 +51,7 @@ exports.update = (req, res) => {
 
   // Can hardcode a change instead of putting req.body and it works, maybe i'm inputting my body in Postman wrong?
 
+  // works now. needed to add key: value
   Review.update(
     {
       rating: req.body.rating,
