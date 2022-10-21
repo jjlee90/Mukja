@@ -26,3 +26,55 @@ exports.create = (req, res) => {
             })
         })
 }
+
+// Finds reviews given an address
+exports.findAll = (req, res) => {
+    const address = req.query.address
+    //let condition = { address: { [Op.like]: `${address}`}}
+    
+    Review.findAll({where: {address: `${address}`}})
+        .then(data => {
+            res.send(data)
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "An error occurred while retrieving reviews, is the address correct?"
+            })
+        })
+}
+
+
+exports.update = (req, res) => {
+    const id = req.params.id
+
+    // Can hardcode a change instead of putting req.body and it works, maybe i'm inputting my body in Postman wrong?
+    Review.update(req.body, {
+        where: {id: id}
+    })
+    .then(promise => {
+        res.send({
+            promise: promise, // returns 1 if successful, 0 if not.
+        })
+    })
+    .catch(err =>{
+        res.status(500).send({
+            message: "Can't update Review, an error occurred."
+        })
+    })
+
+}
+
+exports.delete = (req, res) => {
+    const reviewId = req.params.id
+    const userId = req.params.user_id
+
+    Review.destroy({
+        where: {id: reviewId}
+    })
+    .then(promise => {
+        res.send({
+            promise: promise,
+            message: "Review deleted successfully."
+        })
+    })
+}
