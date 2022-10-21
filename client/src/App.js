@@ -7,16 +7,17 @@ import { useState } from "react"
 
 function App() {
   const [data, setData] = useState([])
-  console.log(setData)
-  console.log(data)
+  const [defaultCenter, setDefaultCenter] = useState([])
 
   return (
     <div className="App">
-      <SearchBar setData={setData} />
-
+      <SearchBar setData={setData} setDefaultCenter={setDefaultCenter} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/places" element={<Places data={data} />} />
+        <Route
+          path="/places"
+          element={<Places data={data} defaultCenter={defaultCenter} />}
+        />
       </Routes>
     </div>
   )

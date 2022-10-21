@@ -47,4 +47,15 @@ api.post("/location", (req, res) => {
   get_rest()
 })
 
+api.post("/comment", (req, res) => {
+  if (!req.body) {
+    res.status(400).json("error")
+  }
+  var formData = req.body
+
+  console.log(formData)
+
+  res.status(200).json(formData)
+})
+
 module.exports = api

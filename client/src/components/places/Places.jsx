@@ -11,11 +11,14 @@ export default function Places(props) {
   const [foodData, setFoodData] = useState([])
   const [loading, setLoading] = useState(false)
   const [selectedRestaurant, setSelectedRestaurant] = useState(0)
+  const [defaultCenter, setDefaultcenter] = useState([])
 
   useEffect(() => {
     setFoodData(props.data)
+    setDefaultcenter(props.defaultCenter)
   })
-  console.log(foodData)
+
+  console.log(defaultCenter)
   let mapData = foodData.map((place, index) => {
     return (
       <PlaceCard
@@ -61,7 +64,11 @@ export default function Places(props) {
           </Popup>
         </div>
         <div className="map-container">
-          {foodData.length !== 0 ? <Map foodData={foodData} /> : <Loader />}
+          {foodData.length !== 0 ? (
+            <Map foodData={foodData} defaultCenter={defaultCenter} />
+          ) : (
+            <Loader />
+          )}
         </div>
       </div>
     </div>

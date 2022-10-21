@@ -42,11 +42,11 @@ export default function SearchBar(props) {
     let results = await rest.json()
     console.log(results)
     props.setData(results.businesses)
-
+    props.setDefaultCenter(results.region.center)
     navigate("/places")
     // navigate("/location")
   }
-  console.log(props.data)
+
   return (
     <div>
       <div className="search-container">

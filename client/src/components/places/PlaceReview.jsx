@@ -45,7 +45,7 @@ export default function PlaceReview({
       <div>
         <div className="summary">
           <h3>Review summary</h3>
-          <ReviewInput />
+          <ReviewInput name={name} />
         </div>
         <p>{reviews}</p>
       </div>
