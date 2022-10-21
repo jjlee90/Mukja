@@ -17,7 +17,7 @@ app.use(express.json())
 const db = require("./models/index.db")
 
 db.sequelize
-  .sync({ force: true }) // delete force obj after dev. it drops all tables then recreates them.
+  .sync({ force: false }) // delete force obj after dev. it drops all tables then recreates them.
   .then(() => {
     console.log("Synced database")
   })
