@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import Login from "../login/Login"
 import { AiOutlineSearch } from "react-icons/ai"
-import { FaUserCircle } from "react-icons/fa"
 import logo from "../../images/logo.png"
+import Navbar from "../navbar/Navbar"
 import "./searchbar.scss"
 
 export default function SearchBar(props) {
@@ -85,8 +84,7 @@ export default function SearchBar(props) {
           </form>
         </div>
         <div>
-          {/* <button>Sign Up</button> */}
-          <Login />
+          <Navbar />
         </div>
       </div>
     </div>

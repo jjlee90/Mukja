@@ -7,8 +7,7 @@ const methodOverride = require("method-override")
 require("dotenv").config()
 const PORT = 3000
 
-// app.use(methodOverride("_method"))
-
+app.use(methodOverride("_method"))
 app.use(cors()) // For development purposes, comment this line out before building (we will be running our server and client on the same port, so we won't need this)
 app.use(express.urlencoded({ extended: true }))
 // app.use(bodyParser.json())
@@ -28,6 +27,8 @@ db.sequelize
 const apiController = require("./controllers/api_controller.js")
 app.use("/api", apiController)
 require("./routes/review.routes")(app)
+
+app.use("/api/users", require("./routes/userRoutes"))
 app.listen(PORT, () => {
   console.log(`Server is rockin' on port ${PORT}`)
 })

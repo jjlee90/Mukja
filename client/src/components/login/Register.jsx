@@ -1,20 +1,24 @@
 import { useState, useEffect } from "react"
-import { FaSignInAlt } from "react-icons/fa"
+// useSelector used for selecting something from state
+// dispatch a function using useDispatch
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
-// register and reset function
-import { login, reset } from "../../features/auth/authSlice"
-import Loading from "../loader/Loading"
-import "./login.scss"
+import { FaUser } from "react-icons/fa"
 
-export default function Login() {
+// register and reset function
+import { register, reset } from "../../features/auth/authSlice"
+import Loading from "../loader/Loading"
+
+export default function Register() {
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
+    password2: "",
   })
 
-  const { email, password } = formData
+  const { name, email, password, password2 } = formData
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -36,10 +40,6 @@ export default function Login() {
     dispatch(reset())
   }, [user, isError, isSuccess, message, navigate, dispatch])
 
-  if (isLoading) {
-    return <Loading />
-  }
-
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -50,24 +50,46 @@ export default function Login() {
   const onSubmit = (e) => {
     e.preventDefault()
 
-    const userData = {
-      email,
-      password,
-    }
+    if (password !== password2) {
+      toast.error("Password does not match")
+    } else {
+      const userData = {
+        name,
+        email,
+        password,
+      }
 
-    dispatch(login(userData))
+      dispatch(register(userData))
+    }
   }
+
+  if (isLoading) {
+    return <Loading />
+  }
+
   return (
-    <div className="loginContainer">
+    <div className="registerContainer">
       <section>
         <h1>
-          <FaSignInAlt /> Log In
+          <FaUser /> Register
         </h1>
-        <p>Log in and get started!</p>
+        <p>Please create an account</p>
       </section>
 
       <section className="form">
         <form onSubmit={onSubmit}>
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              name="name"
+              value={name}
+              placeholder="Enter your name"
+              onChange={onChange}
+            />
+          </div>
+
           <div className="form-group">
             <input
               type="email"
@@ -92,6 +114,18 @@ export default function Login() {
             />
           </div>
 
+          <div className="form-group">
+            <input
+              type="password"
+              className="form-control"
+              id="password2"
+              name="password2"
+              value={password2}
+              placeholder="Confirm password"
+              onChange={onChange}
+            />
+          </div>
+
           <div>
             <button type="submit" className="btn btn-block">
               Submit
@@ -102,52 +136,3 @@ export default function Login() {
     </div>
   )
 }
-
-// export default function Login() {
-//   const [user, setUser] = useState({})
-
-//   function handleClick(event) {
-//     event.preventDefault()
-//     // clear user state when logging out
-//     setUser({})
-
-//     console.log("i was clicked")
-//   }
-
-//   function logout() {
-//     return (
-//       <button onClick={handleClick} className="g_id_signout">
-//         Log Out
-//       </button>
-//     )
-//   }
-//   console.log(user)
-//   return (
-//     <div>
-//       {
-//         // if user.length is not 0 show log out button, else show login button
-//         Object.keys(user).length != 0 ? (
-//           // google log out button
-//           logout()
-//         ) : (
-//           // sign in with google button. local host must be running on port 3000.
-//           <GoogleLogin
-//             onSuccess={(credentialResponse) => {
-//               console.log(credentialResponse)
-
-//               // decode jwt from google response
-//               var userObject = jwt_decode(credentialResponse.credential)
-//               console.log(userObject.name)
-
-//               // set user using decoded object
-//               setUser(userObject)
-//             }}
-//             onError={() => {
-//               console.log("Login Failed")
-//             }}
-//           />
-//         )
-//       }
-//     </div>
-//   )
-// }
