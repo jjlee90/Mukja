@@ -1,5 +1,6 @@
 const db = require("../models/index.db")
 const Review = db.reviews
+const User = db.users
 const Op = db.Sequelize.Op
 
 exports.create = (req, res) => {
@@ -14,6 +15,7 @@ exports.create = (req, res) => {
     rating: req.body.rating,
     content: req.body.content,
     address: req.body.address,
+    user_id: req.body.user_id,
   }
 
   Review.create(review)
@@ -22,6 +24,7 @@ exports.create = (req, res) => {
       res.send(data)
     })
     .catch((err) => {
+      console.log(err)
       res.status(500).send({
         message: err.message || "An error occured while creating the review.",
       })

@@ -11,9 +11,9 @@ const asyncHandler = require("express-async-handler")
 // @access Public
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body
+  const { firstName, lastName, email, password } = req.body
 
-  if (!name || !email || !password) {
+  if (!firstName || !lastName || !email || !password) {
     res.status(400)
     throw new Error("Please add all fields")
   }
@@ -30,7 +30,8 @@ const registerUser = asyncHandler(async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, salt)
 
   const user = await User.create({
-    name,
+    firstName,
+    lastName,
     email,
     password: hashedPassword,
   })
@@ -38,7 +39,8 @@ const registerUser = asyncHandler(async (req, res) => {
   if (user) {
     res.status(201).json({
       _id: user.id,
-      name: user.name,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
       token: generateToken(user._id),
     })
@@ -55,12 +57,13 @@ const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body
 
   // Check for user email
-  const user = await User.findOne({ email })
+  const user = await User.findOne({ where: { email: email } })
 
   if (user && (await bcrypt.compare(password, user.password))) {
     res.json({
-      _id: user.id,
-      name: user.name,
+      _id: user.user_id,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
       token: generateToken(user._id),
     })

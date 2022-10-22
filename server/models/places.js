@@ -1,9 +1,18 @@
 module.exports = (sequelize, Sequelize) => {
-  const Review = sequelize.define("review", {
-    review_id: {
+  const Places = sequelize.define("place", {
+    place_id: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
       primaryKey: true,
+    },
+
+    user_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
+    review_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
     },
     rating: {
       type: Sequelize.FLOAT,
@@ -15,10 +24,6 @@ module.exports = (sequelize, Sequelize) => {
     },
     address: {
       type: Sequelize.STRING,
-      allowNull: false,
-    },
-    user_id: {
-      type: Sequelize.INTEGER,
       allowNull: false,
     },
   })

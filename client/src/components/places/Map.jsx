@@ -1,6 +1,14 @@
-import React from "react"
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
+import React, { useEffect } from "react"
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet"
 import "./places.scss"
+
+const RecenterAutomatically = ({ lat, lng }) => {
+  const map = useMap()
+  useEffect(() => {
+    map.setView([lat, lng])
+  }, [lat, lng])
+  return null
+}
 
 export default function Map({ foodData, defaultCenter }) {
   let locationPin = foodData.map((place, index) => {
@@ -13,8 +21,6 @@ export default function Map({ foodData, defaultCenter }) {
       </Marker>
     )
   })
-
-  console.log(defaultCenter)
 
   return (
     <div className="map">
@@ -29,6 +35,10 @@ export default function Map({ foodData, defaultCenter }) {
         />
 
         {locationPin}
+        <RecenterAutomatically
+          lat={defaultCenter.latitude}
+          lng={defaultCenter.longitude}
+        />
       </MapContainer>
     </div>
   )
