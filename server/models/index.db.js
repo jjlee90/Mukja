@@ -22,4 +22,7 @@ db.sequelize = sequelize;
 db.users = require("./users.js")(sequelize, Sequelize);
 
 db.reviews = require('./reviews.js')(sequelize, Sequelize);
+
+db.users.hasMany(db.reviews)
+db.reviews.belongsTo(db.users)
 module.exports = db;

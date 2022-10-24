@@ -12,11 +12,12 @@ app.use(cors()) // For development purposes, comment this line out before buildi
 app.use(express.urlencoded({ extended: true }))
 // app.use(bodyParser.json())
 app.use(express.json())
+app.use(express.static('../client/public'))
 
 const db = require("./models/index.db")
 
 db.sequelize
-  .sync({ force: false }) // delete force obj after dev. it drops all tables then recreates them.
+  .sync({ force: true }) // delete force obj after dev. it drops all tables then recreates them.
   .then(() => {
     console.log("Synced database")
   })
