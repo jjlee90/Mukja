@@ -18,6 +18,7 @@ exports.create = (req, res) => {
     content: req.body.content,
     address: req.body.address,
     user_id: req.body.user_id,
+    firstName: req.body.firstName,
   }
 
   Review.create(review)

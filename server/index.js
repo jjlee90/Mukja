@@ -16,6 +16,7 @@ app.use(express.static('../client/build'))
 const db = require("./models/index.db")
 
 db.sequelize
+  .sync() // delete force obj after dev. it drops all tables then recreates them.
   .sync()
   .then(() => {})
   .catch((err) => {

@@ -27,8 +27,9 @@ export default function ReviewInput({ name, address, setCreateReview }) {
   async function handleClick(e) {
     e.preventDefault()
     const id = JSON.parse(await localStorage.getItem("user"))._id
-
-    const data = { ...formInput, user_id: id }
+    const name = JSON.parse(await localStorage.getItem("user")).firstName
+    const data = { ...formInput, user_id: id, firstName: name }
+    console.log(name)
 
     // post request, create review with form data
     let rest = await fetch("http://localhost:3000/api/reviews", {
@@ -40,6 +41,7 @@ export default function ReviewInput({ name, address, setCreateReview }) {
     })
     let results = await rest.json()
     console.log(results)
+    console.log(id)
     // passing results to  ./PlaceReview.jsx
     setCreateReview(results)
   }

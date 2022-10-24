@@ -29,7 +29,8 @@ export default function PlaceReview({
     return (
       <div>
         <hr />
-        <p>Username</p>
+        {/* test */}
+        <p>{createReview.firstName}</p>
         <p>{createReview.rating}</p>
         <p>{createReview.content}</p>
         <hr />
