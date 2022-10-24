@@ -26,7 +26,7 @@ export default function ReviewInput({ name, address, setCreateReview }) {
 
   async function handleClick(e) {
     e.preventDefault()
-    const id = JSON.parse(await localStorage.getItem("user")._id)
+    const id = JSON.parse(await localStorage.getItem("user"))._id
 
     const data = { ...formInput, user_id: id }
 
