@@ -1,36 +1,65 @@
-.logo {
-  display: flex;
-  justify-content: start;
-  width: 5em;
-}
-
 .search-container {
-  margin-top: 1.5em;
-  max-height: 15vh;
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
+  height: 15vh;
 
   form {
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
+    flex-grow: 2;
 
     input {
-      padding: 0 3em;
-      gap: 5em;
       height: 3em;
+      width: 100%;
+    }
+    label {
+      width: 100%;
+    }
+
+    button {
+      height: 3em;
+      padding: 0 1em;
     }
   }
-  button {
-    height: 3em;
-    padding: 0 1em;
-  }
 
-  button:hover {
-    cursor: pointer;
+  .logo {
+    flex-direction: row;
+    width: 5em;
+    margin: 0 5%;
   }
+  .login-cont {
+    flex-direction: row;
+    margin: 0 5%;
+  }
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 .logo:hover {
   cursor: pointer;
+}
+@media (max-width: 768px) {
+  .search-container {
+    flex-direction: column;
+    height: 18vh;
+    form {
+      align-items: flex-end;
+      width: 80%;
+    }
+    .logo {
+      position: absolute;
+      top: 1%;
+      left: 10%;
+    }
+  }
+
+  .login-cont {
+    position: absolute;
+    top: 2%;
+    right: 10%;
+  }
 }

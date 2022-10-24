@@ -9,12 +9,19 @@ api.post("/location", (req, res) => {
     res.status(400).json("error")
   }
   var formData = req.body
-  var { location } = formData
-  console.log(formData)
+  var { location, search, results } = formData
+  if (!search) {
+    search = "food"
+  }
+  if (!results) {
+    results = "10"
+  }
+  console.log("this" + search)
+  console.log("this" + location)
 
   async function get_rest() {
     let rest = await fetch(
-      `https://api.yelp.com/v3/businesses/search?=food&location=${location}&limit=3`,
+      `https://api.yelp.com/v3/businesses/search?term=${search}&location=${location}&limit=${results}`,
       {
         headers: {
           Authorization: `Bearer ${process.env.YELP_API_KEY}`,

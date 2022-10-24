@@ -61,7 +61,9 @@ export default function Places(props) {
       <div className="places-container">
         <div className="card-container">
           <Popup
-            trigger={<div>{foodData.length !== 0 ? mapData : ""}</div>}
+            trigger={
+              <div id="growth">{foodData.length !== 0 ? mapData : ""}</div>
+            }
             position="right"
           >
             <div className="rev-cont">{foodData.length > 0 && mapReview()}</div>

@@ -25,6 +25,7 @@ export default function PlaceReview({
   const [createReview, setCreateReview] = useState({})
 
   function renderReview() {
+    console.log(createReview)
     return (
       <div>
         <hr />

@@ -1,7 +1,8 @@
 .container {
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+
+  padding: 0 2rem 2rem;
 }
 
 .places-container {
@@ -27,6 +28,14 @@
     width: 25%;
   }
 }
+
+// place card scroll bar
+#growth {
+  display: flex;
+  flex-direction: column;
+  max-height: 70vh;
+  overflow-y: scroll;
+}
 .reviews {
   background-color: white;
   margin: 0.5em;
@@ -49,7 +58,7 @@
   position: absolute;
   z-index: 0;
   width: 65%;
-  height: 70%;
+  height: 70vh;
 }
 
 .ratings {
@@ -72,4 +81,47 @@
   background-color: red;
   border: black solid 1px;
   border-radius: 30%;
+}
+
+@media only screen and (max-width: 725px) {
+  .places-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+  .card-container {
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+    height: 20vh;
+  }
+  #growth {
+    flex-direction: row;
+    width: 100%;
+    overflow-y: scroll;
+    flex-wrap: wrap;
+    position: bottom;
+  }
+  .rev-cont {
+    display: flex;
+  }
+  // Places card container
+  .card {
+    display: flex;
+    width: 100%;
+    border: black solid 1px;
+  }
+
+  .leaflet-container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    z-index: 0;
+    width: 90%;
+    height: 50vh;
+  }
+
+  .review-input {
+    position: bottom;
+  }
 }

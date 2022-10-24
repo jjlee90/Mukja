@@ -59,12 +59,12 @@ export default function Login() {
   }
   return (
     <div className="loginContainer">
-      <section>
+      <div>
         <h1>
           <FaSignInAlt /> Log In
         </h1>
         <p>Log in and get started!</p>
-      </section>
+      </div>
 
       <section className="form">
         <form onSubmit={onSubmit}>

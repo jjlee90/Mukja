@@ -1,13 +1,12 @@
-.loginContainer {
+.loginContainer,
+.registerContainer {
   display: flex;
   flex-direction: column;
-  //   width: 100%;
-  // max-width: 960px;
+  align-items: center;
   margin: 0 auto;
   padding: 0 20px;
   text-align: start;
   height: 80vh;
-
   margin-top: 60px;
 
   .loginContainer,

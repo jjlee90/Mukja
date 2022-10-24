@@ -46,46 +46,44 @@ export default function SearchBar(props) {
   }
 
   return (
-    <div>
-      <div className="search-container">
-        <img
-          src={logo}
-          alt="logo"
-          className="logo"
-          onClick={() => navigate("/")}
-        />
-        <div>
-          <form action="">
-            <label htmlFor="search">
-              <input
-                type="text"
-                name="search"
-                id="search"
-                placeholder="search"
-                value={formData.value}
-                onChange={handleChange}
-              />
-            </label>
+    <div className="search-container">
+      <img
+        src={logo}
+        alt="logo"
+        className="logo"
+        onClick={() => navigate("/")}
+      />
 
-            <label htmlFor="location">
-              <input
-                type="text"
-                name="location"
-                id="location"
-                placeholder="location"
-                value={formData.value}
-                onChange={handleChange}
-              />
-            </label>
+      <form>
+        <label htmlFor="search">
+          <input
+            type="text"
+            name="search"
+            id="search"
+            placeholder="search"
+            value={formData.value}
+            onChange={handleChange}
+          />
+        </label>
 
-            <button onClick={handleClick}>
-              <AiOutlineSearch />
-            </button>
-          </form>
-        </div>
-        <div>
-          <Navbar />
-        </div>
+        <label htmlFor="location">
+          <input
+            type="text"
+            name="location"
+            id="location"
+            placeholder="city, state, or zip"
+            value={formData.value}
+            onChange={handleChange}
+          />
+        </label>
+
+        <button onClick={handleClick}>
+          <AiOutlineSearch />
+        </button>
+      </form>
+
+      <div className="login-cont">
+        <Navbar />
       </div>
     </div>
   )
