@@ -12,6 +12,7 @@ app.use(cors()) // For development purposes, comment this line out before buildi
 app.use(express.urlencoded({ extended: true }))
 // app.use(bodyParser.json())
 app.use(express.json())
+app.use(express.static('../client/public'))
 
 const db = require("./models/index.db")
 
