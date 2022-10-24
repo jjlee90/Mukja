@@ -12,13 +12,14 @@ import Loading from "../loader/Loading"
 
 export default function Register() {
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     password2: "",
   })
 
-  const { name, email, password, password2 } = formData
+  const { firstName, lastName, email, password, password2 } = formData
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -54,7 +55,8 @@ export default function Register() {
       toast.error("Password does not match")
     } else {
       const userData = {
-        name,
+        firstName,
+        lastName,
         email,
         password,
       }
@@ -69,23 +71,34 @@ export default function Register() {
 
   return (
     <div className="registerContainer">
-      <section>
+      <div>
         <h1>
           <FaUser /> Register
         </h1>
         <p>Please create an account</p>
-      </section>
-
+      </div>
       <section className="form">
         <form onSubmit={onSubmit}>
           <div className="form-group">
             <input
               type="text"
               className="form-control"
-              id="name"
-              name="name"
-              value={name}
-              placeholder="Enter your name"
+              id="firstName"
+              name="firstName"
+              value={firstName}
+              placeholder="Enter your first name"
+              onChange={onChange}
+            />
+          </div>
+
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control"
+              id="lastName"
+              name="lastName"
+              value={lastName}
+              placeholder="Enter your last name"
               onChange={onChange}
             />
           </div>

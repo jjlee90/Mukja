@@ -1,28 +1,32 @@
 module.exports = (sequelize, Sequelize) => {
-  const Users = sequelize.define("user", {
-    user_id: {
+  const Places = sequelize.define("place", {
+    place_id: {
       type: Sequelize.INTEGER,
       autoIncrement: true,
       primaryKey: true,
     },
-    firstName: {
+
+    user_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
+    review_id: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
+    rating: {
+      type: Sequelize.FLOAT,
+      allowNull: false,
+    },
+    content: {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    lastname: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-    email: {
-      type: Sequelize.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    password: {
+    address: {
       type: Sequelize.STRING,
       allowNull: false,
     },
   })
 
-  return Users
+  return Review
 }

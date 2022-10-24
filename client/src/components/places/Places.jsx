@@ -16,15 +16,12 @@ export default function Places(props) {
   const [selectedRestaurant, setSelectedRestaurant] = useState(0)
 
   // center point used to render map
-  const [defaultCenter, setDefaultcenter] = useState([])
 
   // setting data from SearchBar
   useEffect(() => {
     setFoodData(props.data)
-    setDefaultcenter(props.defaultCenter)
+    // setDefaultcenter(props.defaultCenter)
   })
-
-  console.log(defaultCenter)
 
   // map data to create PlaceCards. Used as trigger to Popup ./PlaceReview.jsx
   let mapData = foodData.map((place, index) => {
@@ -57,8 +54,6 @@ export default function Places(props) {
       />
     )
   }
-  console.log(foodData[0])
-  console.log(selectedRestaurant)
 
   return (
     <div className="container">
@@ -66,7 +61,9 @@ export default function Places(props) {
       <div className="places-container">
         <div className="card-container">
           <Popup
-            trigger={<div>{foodData.length !== 0 ? mapData : ""}</div>}
+            trigger={
+              <div id="growth">{foodData.length !== 0 ? mapData : ""}</div>
+            }
             position="right"
           >
             <div className="rev-cont">{foodData.length > 0 && mapReview()}</div>
@@ -74,7 +71,7 @@ export default function Places(props) {
         </div>
         <div className="map-container">
           {foodData.length !== 0 ? (
-            <Map foodData={foodData} defaultCenter={defaultCenter} />
+            <Map foodData={foodData} defaultCenter={props.defaultCenter} />
           ) : (
             <Loader />
           )}

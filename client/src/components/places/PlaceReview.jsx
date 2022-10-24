@@ -23,10 +23,9 @@ export default function PlaceReview({
 }) {
   // POST results passed from ./ReviewInput.jsx to renderReview()
   const [createReview, setCreateReview] = useState({})
-  console.log(createReview)
-  console.log(createReview.content)
 
   function renderReview() {
+    console.log(createReview)
     return (
       <div>
         <hr />

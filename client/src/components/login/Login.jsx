@@ -59,12 +59,12 @@ export default function Login() {
   }
   return (
     <div className="loginContainer">
-      <section>
+      <div>
         <h1>
           <FaSignInAlt /> Log In
         </h1>
         <p>Log in and get started!</p>
-      </section>
+      </div>
 
       <section className="form">
         <form onSubmit={onSubmit}>
@@ -102,52 +102,3 @@ export default function Login() {
     </div>
   )
 }
-
-// export default function Login() {
-//   const [user, setUser] = useState({})
-
-//   function handleClick(event) {
-//     event.preventDefault()
-//     // clear user state when logging out
-//     setUser({})
-
-//     console.log("i was clicked")
-//   }
-
-//   function logout() {
-//     return (
-//       <button onClick={handleClick} className="g_id_signout">
-//         Log Out
-//       </button>
-//     )
-//   }
-//   console.log(user)
-//   return (
-//     <div>
-//       {
-//         // if user.length is not 0 show log out button, else show login button
-//         Object.keys(user).length != 0 ? (
-//           // google log out button
-//           logout()
-//         ) : (
-//           // sign in with google button. local host must be running on port 3000.
-//           <GoogleLogin
-//             onSuccess={(credentialResponse) => {
-//               console.log(credentialResponse)
-
-//               // decode jwt from google response
-//               var userObject = jwt_decode(credentialResponse.credential)
-//               console.log(userObject.name)
-
-//               // set user using decoded object
-//               setUser(userObject)
-//             }}
-//             onError={() => {
-//               console.log("Login Failed")
-//             }}
-//           />
-//         )
-//       }
-//     </div>
-//   )
-// }

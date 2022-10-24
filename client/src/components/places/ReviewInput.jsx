@@ -26,8 +26,9 @@ export default function ReviewInput({ name, address, setCreateReview }) {
 
   async function handleClick(e) {
     e.preventDefault()
+    const id = JSON.parse(await localStorage.getItem("user"))._id
 
-    const data = { ...formInput }
+    const data = { ...formInput, user_id: id }
 
     // post request, create review with form data
     let rest = await fetch("http://localhost:3000/api/reviews", {
@@ -39,7 +40,6 @@ export default function ReviewInput({ name, address, setCreateReview }) {
     })
     let results = await rest.json()
     console.log(results)
-
     // passing results to  ./PlaceReview.jsx
     setCreateReview(results)
   }
@@ -49,12 +49,12 @@ export default function ReviewInput({ name, address, setCreateReview }) {
       <Popup trigger={<button>Leave a Review</button>} position="right center">
         <h3>{name}</h3>
         <p>{address}</p>
-        <p>Username</p>
-        <p>
+        {/* <div>
           <DynamicStar width={15} height={15} emptyStarColor={"#D3D3D3"} />
-        </p>
+        </div> */}
         <form onClick={handleClick}>
           <label htmlFor="rating">
+            Rating:
             <input
               type="number"
               name="rating"

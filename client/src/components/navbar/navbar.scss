@@ -1,12 +1,11 @@
 .navbar {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-
   ul {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1em;
+    padding: 0;
   }
 
   li {
@@ -15,9 +14,11 @@
 
   a {
     text-decoration: none;
-  }
-  ul li {
-    margin-left: 20px;
+    color: white;
+    background-color: black;
+    border: 1px solid none;
+    border-radius: 8%;
+    padding: 0.5em;
   }
 
   ul li a {
@@ -26,7 +27,8 @@
   }
 
   ul li a:hover {
-    color: #777;
+    transform: scale(0.98);
+    opacity: 80%;
   }
   ul li a svg {
     margin-right: 0.5em;
