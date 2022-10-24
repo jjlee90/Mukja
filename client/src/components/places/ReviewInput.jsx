@@ -31,7 +31,7 @@ export default function ReviewInput({ name, address, setCreateReview }) {
     const data = { ...formInput, user_id: id }
 
     // post request, create review with form data
-    let rest = await fetch("http://localhost:3000/api/reviews", {
+    let rest = await fetch(`http://localhost:3000/api/reviews`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -39,6 +39,7 @@ export default function ReviewInput({ name, address, setCreateReview }) {
       body: JSON.stringify(data),
     })
     let results = await rest.json()
+    results.userName = "Your Review:"
     console.log(results)
     // passing results to  ./PlaceReview.jsx
     setCreateReview(results)

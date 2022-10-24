@@ -29,7 +29,7 @@ export default function PlaceReview({
     return (
       <div>
         <hr />
-        <p>Username</p>
+        <p>{createReview.userName}</p>
         <p>{createReview.rating}</p>
         <p>{createReview.content}</p>
         <hr />
