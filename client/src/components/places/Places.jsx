@@ -1,62 +1,83 @@
 import { useState, useEffect } from "react"
 import Map from "./Map"
-import holder from "../../images/logo.png"
 import Loader from "../loader/Loader"
-
-export default function Places() {
+import PlaceCard from "./PlacesCard"
+import PlaceReview from "./PlaceReview"
+import Popup from "reactjs-popup"
+import "reactjs-popup/dist/index.css"
+export default function Places(props) {
   // usestate to set fetched food data
+
+  // set food data from ../search/SearchBar
   const [foodData, setFoodData] = useState([])
   const [loading, setLoading] = useState(false)
 
+  // track PlaceCard on click based on index e.g. foodData[0]
+  const [selectedRestaurant, setSelectedRestaurant] = useState(0)
+
+  // center point used to render map
+  const [defaultCenter, setDefaultcenter] = useState([])
+
+  // setting data from SearchBar
   useEffect(() => {
-    const fetchFoods = async () => {
-      setLoading(true)
-      const res = await fetch("https://pokeapi.co/api/v2/pokemon/ditto")
-      // "https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=food&location=-33.8670522%2C151.1957362&radius=500&key=AIzaSyBBCTOjiUO1KXaskE4mQnQkHLpf2LAlCMw"
+    setFoodData(props.data)
+    setDefaultcenter(props.defaultCenter)
+  })
 
-      const { abilities } = await res.json()
+  console.log(defaultCenter)
 
-      setFoodData(abilities)
+  // map data to create PlaceCards. Used as trigger to Popup ./PlaceReview.jsx
+  let mapData = foodData.map((place, index) => {
+    return (
+      <PlaceCard
+        key={place.id}
+        name={place.name}
+        image={place.image_url}
+        address={place.location.address1}
+        index={index}
+        setSelectedRestaurant={setSelectedRestaurant}
+      />
+    )
+  })
 
-      setLoading(false)
-    }
-
-    fetchFoods()
-    console.log(foodData)
-  }, [])
+  function mapReview() {
+    return (
+      <PlaceReview
+        name={foodData[selectedRestaurant].name}
+        url={foodData[selectedRestaurant].url}
+        ratings={foodData[selectedRestaurant].rating}
+        review_count={foodData[selectedRestaurant].review_count}
+        price={foodData[selectedRestaurant].price}
+        categories={
+          foodData[selectedRestaurant].categories[selectedRestaurant]?.title
+        }
+        is_closed={foodData[selectedRestaurant].is_closed}
+        address={foodData[selectedRestaurant].location.address1}
+        phone={foodData[selectedRestaurant].display_phone}
+      />
+    )
+  }
+  console.log(foodData[0])
+  console.log(selectedRestaurant)
 
   return (
     <div className="container">
       <h3>Places</h3>
       <div className="places-container">
         <div className="card-container">
-          <div className="card">
-            <img src={holder} alt="place-placeholder" className="holder" />
-            <div>
-              <p>Wendy's</p>
-              <p>3.8 *** (521)</p>
-              <p>555 College Ave</p>
-            </div>
-          </div>
-          <div className="card">
-            <img src={holder} alt="place-placeholder" className="holder" />
-            <div>
-              <p>Wendy's</p>
-              <p>3.8 *** (521)</p>
-              <p>555 College Ave</p>
-            </div>
-          </div>
-          <div className="card">
-            <img src={holder} alt="place-placeholder" className="holder" />
-            <div>
-              <p>Wendy's</p>
-              <p>3.8 *** (521)</p>
-              <p>555 College Ave</p>
-            </div>
-          </div>
+          <Popup
+            trigger={<div>{foodData.length !== 0 ? mapData : ""}</div>}
+            position="right"
+          >
+            <div className="rev-cont">{foodData.length > 0 && mapReview()}</div>
+          </Popup>
         </div>
         <div className="map-container">
-          {!loading ? <Map foodData={foodData} /> : <Loader />}
+          {foodData.length !== 0 ? (
+            <Map foodData={foodData} defaultCenter={defaultCenter} />
+          ) : (
+            <Loader />
+          )}
         </div>
       </div>
     </div>

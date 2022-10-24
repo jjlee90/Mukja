@@ -1,18 +1,20 @@
-import { AiOutlineSearch } from "react-icons/ai"
-import { FaUserCircle } from "react-icons/fa"
-import logo from "../../images/logo.png"
-import "./searchbar.scss"
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { AiOutlineSearch } from "react-icons/ai"
+import logo from "../../images/logo.png"
+import Navbar from "../navbar/Navbar"
+import "./searchbar.scss"
 
-export default function SearchBar() {
+export default function SearchBar(props) {
   const navigate = useNavigate()
 
+  // form inputs to create url string for yelp API
   const [formData, setFormData] = useState({
     search: "",
     location: "",
   })
 
+  // listen and handle changes in <form>
   function handleChange(e) {
     e.preventDefault()
     setFormData((prevFormData) => {
@@ -21,11 +23,25 @@ export default function SearchBar() {
         [e.target.name]: e.target.value,
       }
     })
-    console.log(formData)
   }
 
-  function handleClick(e) {
+  // POST req, create url string using form data
+  async function handleClick(e) {
     e.preventDefault()
+
+    const data = { ...formData }
+
+    let rest = await fetch("http://localhost:3000/api/location", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+    let results = await rest.json()
+    console.log(results)
+    props.setData(results.businesses)
+    props.setDefaultCenter(results.region.center)
     navigate("/places")
   }
 
@@ -68,8 +84,7 @@ export default function SearchBar() {
           </form>
         </div>
         <div>
-          <button>Sign Up</button>
-          <button>Login</button>
+          <Navbar />
         </div>
       </div>
     </div>
