@@ -23,23 +23,22 @@ export default function Map({ foodData, defaultCenter }) {
   })
 
   return (
-    <div className="map">
-      <MapContainer
-        center={[defaultCenter.latitude, defaultCenter.longitude]}
-        zoom={12}
-        scrollWheelZoom={false}
-      >
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
+    <MapContainer
+      center={[defaultCenter.latitude, defaultCenter.longitude]}
+      zoom={12}
+      scrollWheelZoom={false}
+      className="map"
+    >
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
 
-        {locationPin}
-        <RecenterAutomatically
-          lat={defaultCenter.latitude}
-          lng={defaultCenter.longitude}
-        />
-      </MapContainer>
-    </div>
+      {locationPin}
+      <RecenterAutomatically
+        lat={defaultCenter.latitude}
+        lng={defaultCenter.longitude}
+      />
+    </MapContainer>
   )
 }

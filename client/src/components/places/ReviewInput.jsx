@@ -48,36 +48,52 @@ export default function ReviewInput({ name, address, setCreateReview }) {
 
   return (
     <div className="review-input">
-      <Popup trigger={<button>Leave a Review</button>} position="right center">
-        <h3>{name}</h3>
-        <p>{address}</p>
-        {/* <div>
-          <DynamicStar width={15} height={15} emptyStarColor={"#D3D3D3"} />
-        </div> */}
-        <form onClick={handleClick}>
-          <label htmlFor="rating">
-            Rating:
-            <input
-              type="number"
-              name="rating"
-              id="rating"
-              max="5"
-              onChange={handleChange}
-            />
-          </label>
-          <label htmlFor="content">
-            <textarea
-              type="text"
-              name="content"
-              value={formInput.value}
-              placeholder="How was your experience here?"
-              id="content"
-              onChange={handleChange}
-            />
-          </label>
-          <button>Cancel</button>
-          <button>Post</button>
-        </form>
+      <Popup trigger={<button>Leave a Review</button>} modal nested>
+        {(close) => (
+          <div>
+            <h3>{name}</h3>
+            <p>{address}</p>
+
+            <form onClick={handleClick}>
+              <label htmlFor="rating">
+                Rating:
+                <input
+                  type="number"
+                  name="rating"
+                  id="rating"
+                  max="5"
+                  placeholder="Select 1-5"
+                  onChange={handleChange}
+                />
+              </label>
+              <label htmlFor="content">
+                <textarea
+                  type="text"
+                  name="content"
+                  value={formInput.value}
+                  placeholder="How was your experience here?"
+                  id="content"
+                  onChange={handleChange}
+                />
+              </label>
+              <div className="actions">
+                <div className="modal">
+                  <button className="close" onClick={close}>
+                    Cancel
+                  </button>
+                </div>
+                <button
+                  className="button"
+                  onClick={() => {
+                    close()
+                  }}
+                >
+                  Post
+                </button>
+              </div>
+            </form>
+          </div>
+        )}
       </Popup>
     </div>
   )
