@@ -31,7 +31,7 @@ export default function SearchBar(props) {
 
     const data = { ...formData }
 
-    let rest = await fetch("http://localhost:3000/api/location", {
+    let rest = await fetch("http://ec2-52-206-211-87.compute-1.amazonaws.com/api/location", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
