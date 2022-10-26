@@ -11,12 +11,12 @@ app.use(methodOverride("_method"))
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-app.use(express.static('../client/build'))
+app.use(express.static("../client/build"))
 
 const db = require("./models/index.db")
 
 db.sequelize
-  .sync({force: true}) // delete force obj after dev. it drops all tables then recreates them.
+  .sync() // {force: false} delete force obj after dev. it drops all tables then recreates them.
   .then(() => {})
   .catch((err) => {
     console.log("Couldn't sync db: " + err.message)

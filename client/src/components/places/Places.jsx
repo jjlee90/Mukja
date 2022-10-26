@@ -29,6 +29,8 @@ export default function Places(props) {
       <PlaceCard
         key={place.id}
         name={place.name}
+        rating={place.rating}
+        review_count={place.review_count}
         image={place.image_url}
         address={place.location.address1}
         index={index}
@@ -64,7 +66,8 @@ export default function Places(props) {
             trigger={
               <div id="growth">{foodData.length !== 0 ? mapData : ""}</div>
             }
-            position="right"
+            modal
+            nested
           >
             <div className="rev-cont">{foodData.length > 0 && mapReview()}</div>
           </Popup>
