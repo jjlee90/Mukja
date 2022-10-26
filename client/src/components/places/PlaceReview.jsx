@@ -41,7 +41,7 @@ export default function PlaceReview({
     <div className="reviews">
       <div>
         <h3>{name}</h3>
-        <button src={url}>Website</button>
+        <a href={url}>Website</a>
       </div>
       <div className="ratings">
         {ratings}
