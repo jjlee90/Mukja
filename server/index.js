@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express()
 const cors = require("cors")
-
+const path = require("path")
 const bodyParser = require("body-parser")
 const methodOverride = require("method-override")
 require("dotenv").config()
@@ -11,9 +11,15 @@ app.use(methodOverride("_method"))
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-app.use(express.static("../client/build"))
 
+// app.use(express.static(path.join(__dirname, "../client/build")))
+console.log(path.join(__dirname, "client", "build"))
 const db = require("./models/index.db")
+
+// serve static front end in production mode
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client", "build")))
+}
 
 db.sequelize
   .sync() // {force: false} delete force obj after dev. it drops all tables then recreates them.
