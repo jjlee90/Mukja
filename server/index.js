@@ -11,9 +11,9 @@ app.use(methodOverride("_method"))
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-
+app.use(cors())
 // app.use(express.static(path.join(__dirname, "../client/build")))
-// console.log(path.join(__dirname, "client", "build"))
+console.log(path.join(__dirname, "client", "build"))
 const db = require("./models/index.db")
 
 // serve static front end in production mode
