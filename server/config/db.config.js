@@ -1,5 +1,5 @@
 module.exports = {
-  HOST: "localhost",
+  HOST: process.env.PORT,
   USER: process.env.DB_USERNAME,
   PASSWORD: process.env.DB_PASSWORD,
   DB: process.env.DB_DATABASE,
