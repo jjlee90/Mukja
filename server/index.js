@@ -13,12 +13,17 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors())
 // app.use(express.static(path.join(__dirname, "../client/build")))
-console.log(path.join(__dirname, "client", "build"))
+// console.log(path.join(__dirname, "client", "build"))
 const db = require("./models/index.db")
 
 // serve static front end in production mode
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "client", "build")))
+  app.use(express.static("client/build"))
+
+  app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+  )
+  // app.use(express.static(path.join(__dirname, "client", "build")))
 }
 
 db.sequelize
