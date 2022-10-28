@@ -32,7 +32,7 @@ export default function ReviewInput({ name, address, setCreateReview }) {
     console.log(name)
 
     // post request, create review with form data
-    let rest = await fetch("http://localhost:3000/api/reviews", {
+    let rest = await fetch(`${process.env.REACT_APP_SERVER_URL}api/reviews`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
