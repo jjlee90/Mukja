@@ -33,6 +33,10 @@ db.sequelize
     console.log("Couldn't sync db: " + err.message)
   })
 
+app.use("/", (req, res) => {
+  res.send("hello")
+})
+
 const apiController = require("./controllers/api_controller.js")
 app.use("/api", apiController)
 require("./routes/review.routes")(app)
