@@ -34,7 +34,7 @@ db.sequelize
   })
 
 app.use("/", (req, res) => {
-  res.send("hello")
+  res.json("hello")
 })
 
 const apiController = require("./controllers/api_controller.js")
