@@ -14,7 +14,7 @@ app.use(express.json())
 app.use(cors())
 // app.use(express.static(path.join(__dirname, "../client/build")))
 // console.log(path.join(__dirname, "client", "build"))
-const db = require("./models/index.db")
+// const db = require("./models/index.db")
 
 // // serve static front end in production mode
 // if (process.env.NODE_ENV === "production") {
@@ -26,12 +26,12 @@ const db = require("./models/index.db")
 //   // app.use(express.static(path.join(__dirname, "client", "build")))
 // }
 
-db.sequelize
-  .sync() // {force: false} delete force obj after dev. it drops all tables then recreates them.
-  .then(() => {})
-  .catch((err) => {
-    console.log("Couldn't sync db: " + err.message)
-  })
+// db.sequelize
+//   .sync() // {force: false} delete force obj after dev. it drops all tables then recreates them.
+//   .then(() => {})
+//   .catch((err) => {
+//     console.log("Couldn't sync db: " + err.message)
+//   })
 
 const apiController = require("./controllers/api_controller.js")
 app.use("/api", apiController)
