@@ -31,7 +31,7 @@ export default function SearchBar(props) {
 
     const data = { ...formData }
 
-    let rest = await fetch(`http://mukja-frontend.onrender.com/api/location`, {
+    let rest = await fetch(`http://mukja.onrender.com/api/location`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
