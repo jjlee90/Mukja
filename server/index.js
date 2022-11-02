@@ -18,7 +18,7 @@ const db = require("./models/index.db")
 
 // // serve static front end in production mode
 // if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("client/build"))
+app.use(express.static("../client/build"))
 
 //   app.get("*", (req, res) =>
 //     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
@@ -32,10 +32,6 @@ db.sequelize
   .catch((err) => {
     console.log("Couldn't sync db: " + err.message)
   })
-
-app.use("/", (req, res) => {
-  res.json("hello")
-})
 
 const apiController = require("./controllers/api_controller.js")
 app.use("/api", apiController)
