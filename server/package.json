@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js react-scripts start --prefix ../client",
+    "start": "node index.js serve -s build --prefix ../client/build",
     "server": "nodemon index.js",
-    "build": "npm install react-scripts build --prefix ../client"
+    "build": "npm install react-scripts build npm install serve --prefix ../client"
   },
   "keywords": [],
   "author": "",
