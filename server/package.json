@@ -6,7 +6,7 @@
   "scripts": {
     "install-server": "npm install",
     "install-client": "npm install --prefix ../client",
-    "start": "concurrently \"node index.js\" \"npm run build --prefix ../client\"",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
