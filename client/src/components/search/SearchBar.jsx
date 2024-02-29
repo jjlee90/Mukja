@@ -1,90 +1,112 @@
-import React, { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { AiOutlineSearch } from "react-icons/ai"
-import logo from "../../images/logo.png"
-import Navbar from "../navbar/Navbar"
-import "./searchbar.scss"
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { TextField, Button, Grid } from "@mui/material";
+import { AiOutlineSearch } from "react-icons/ai";
+import logo from "../../images/mukjaLogo.png";
 
 export default function SearchBar(props) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  // form inputs to create url string for yelp API
   const [formData, setFormData] = useState({
     search: "",
     location: "",
-  })
+  });
 
-  // listen and handle changes in <form>
   function handleChange(e) {
-    e.preventDefault()
-    setFormData((prevFormData) => {
-      return {
-        ...prevFormData,
-        [e.target.name]: e.target.value,
-      }
-    })
+    e.preventDefault();
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [e.target.name]: e.target.value,
+    }));
   }
 
-  // POST req, create url string using form data
   async function handleClick(e) {
-    e.preventDefault()
+    e.preventDefault();
 
-    const data = { ...formData }
+    const data = { ...formData };
 
-    let rest = await fetch("http://ec2-52-206-211-87.compute-1.amazonaws.com/api/location", {
+    let rest = await fetch("http://localhost:3001/api/location", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
       },
       body: JSON.stringify(data),
-    })
-    let results = await rest.json()
+    });
+    let results = await rest.json();
 
-    props.setData(results.businesses)
-    props.setDefaultCenter(results.region.center)
-    navigate("/places")
+    props.setData(results.businesses);
+    props.setDefaultCenter(results.region.center);
+    navigate("/places");
   }
 
   return (
-    <div className="search-container">
-      <img
-        src={logo}
-        alt="logo"
-        className="logo"
-        onClick={() => navigate("/")}
-      />
-
-      <form>
-        <label htmlFor="search">
-          <input
-            type="text"
-            name="search"
-            id="search"
-            placeholder="search"
-            value={formData.value}
-            onChange={handleChange}
-          />
-        </label>
-
-        <label htmlFor="location">
-          <input
-            type="text"
-            name="location"
-            id="location"
-            placeholder="city, state, or zip"
-            value={formData.value}
-            onChange={handleChange}
-          />
-        </label>
-
-        <button onClick={handleClick}>
-          <AiOutlineSearch />
-        </button>
-      </form>
-
-      <div className="login-cont">
-        <Navbar />
-      </div>
-    </div>
-  )
+    <Grid
+      container
+      alignItems="center"
+      sx={{ outline: "none" }}
+      // spacing={2}
+      // style={{ backgroundColor: "#00ACD5" }}
+    >
+      <Grid item xs={12} sm={6} md={4} lg={3} sx={{ outline: "none" }}>
+        <img
+          src={logo}
+          alt="logo"
+          style={{ cursor: "pointer", outline: "none" }}
+          onClick={() => navigate("/")}
+        />
+      </Grid>
+      <Grid item xs={12} sm={6} md={8} lg={9}>
+        <form onSubmit={handleClick} style={{ width: "100%" }}>
+          <Grid container spacing={2} alignItems="center">
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                label="Search for restaurants..."
+                name="search"
+                value={formData.search}
+                onChange={handleChange}
+                variant="outlined"
+                size="small"
+                // InputLabelProps={{
+                //   style: { color: "black" },
+                // }}
+                sx={{ backgroundColor: "#ffffff" }}
+              />
+            </Grid>
+            <Grid item xs={4}>
+              <TextField
+                fullWidth
+                label="City, State or Zip Code"
+                name="location"
+                value={formData.location}
+                onChange={handleChange}
+                variant="outlined"
+                size="small"
+                InputLabelProps={
+                  {
+                    // style: { color: "#ffe239" },
+                  }
+                }
+                style={{ backgroundColor: "#ffffff" }}
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <Button
+                variant="contained"
+                type="submit"
+                sx={{
+                  backgroundColor: "#ffe239",
+                  color: "#00ACD5",
+                  fontWeight: "bold",
+                }}
+              >
+                <AiOutlineSearch style={{ marginRight: 5 }} />
+                Search
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
+      </Grid>
+    </Grid>
+  );
 }

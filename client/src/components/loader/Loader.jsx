@@ -1,11 +1,10 @@
-import spinner from "../../images/spinner.gif"
-import "./loader.scss"
+import spinner from "../../images/spinner.gif";
 
 export default function () {
   return (
-    <div className="loader">
+    <div>
       <img src={spinner} alt="Loading" />
       <h1>Fetching Data</h1>
     </div>
-  )
+  );
 }
