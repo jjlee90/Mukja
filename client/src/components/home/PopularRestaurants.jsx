@@ -46,10 +46,10 @@ export default function PopularRestaurants() {
   useEffect(() => {
     const fetchRestaurants = async () => {
       try {
-        const data =
-          process.env.NODE_ENV === "development"
-            ? mockRestaurantData
-            : await fetchPopularRestaurants();
+        const data = mockRestaurantData;
+        // process.env.NODE_ENV === "development"
+        //   ? mockRestaurantData
+        //   : await fetchPopularRestaurants();
         setRestaurants(data);
       } catch (error) {
         console.error(error);
