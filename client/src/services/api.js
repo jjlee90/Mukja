@@ -7,7 +7,7 @@ if (process.env.NODE_ENV === "development") {
   baseURL = "http://localhost:3001/api";
 } else {
   // Running on Netlify
-  baseURL = "/.netlify/functions";
+  baseURL = "https://mukja.netlify.app/.netlify/functions";
 }
 
 const api = axios.create({

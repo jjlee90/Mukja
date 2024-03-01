@@ -24,10 +24,7 @@ export default function SearchBar(props) {
   async function handleClick(e) {
     e.preventDefault();
     const data = { ...formData };
-    const requester = "blah:richbae@blah";
-    const username = `@${requester.split(":")[1].split("@")[0]}`;
-    console.log(username);
-    // const alias = "@" + username;
+
     let rest = await api.post("/location", data);
 
     let results = await rest.data;
