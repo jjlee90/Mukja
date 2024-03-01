@@ -35,7 +35,7 @@ require("./routes/review.routes")(app);
 app.use("/api/users", require("./routes/userRoutes"));
 
 app.get("/*", function (req, res) {
-  res.sendFile(path.join(buildPath, "index.html"), function (err) {
+  res.sendFile(path.resolve(buildPath, "index.html"), function (err) {
     if (err) {
       res.status(500).send(err);
     }
