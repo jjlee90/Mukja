@@ -34,42 +34,6 @@ export default function SearchBar(props) {
     props.setDefaultCenter(results.region.center);
     navigate("/places");
   }
-  // async function handleClick(e) {
-  //   e.preventDefault();
-  //   const { search, location } = formData;
-  //   const apiKey = process.env.REACT_APP_YELP_API_KEY;
-
-  //   try {
-  //     const response = await fetch("/api/location", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ search, location, apiKey }),
-  //     });
-
-  //     // Check if response status is ok
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error! Status: ${response.status}`);
-  //     }
-
-  //     // Check if response is empty
-  //     const text = await response.text();
-  //     if (!text) {
-  //       throw new Error("Empty response received");
-  //     }
-
-  //     // Parse response as JSON
-  //     const results = JSON.parse(text);
-
-  //     props.setData(results.businesses);
-  //     props.setDefaultCenter(results.region.center);
-  //     navigate("/places");
-  //   } catch (error) {
-  //     console.error("Error calling location API:", error);
-  //     // Handle error
-  //   }
-  // }
 
   return (
     <Grid container alignItems="center" sx={{ outline: "none" }}>

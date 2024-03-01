@@ -1,47 +1,90 @@
-import React from "react"
-import { DynamicStar } from "react-dynamic-star"
-import "./places.scss"
+import React from "react";
+import { DynamicStar } from "react-dynamic-star";
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Typography,
+  Button,
+  Grid,
+  Box,
+} from "@mui/material";
 
-export default function PlaceCard({
-  image,
-  name,
-  url,
-  is_closed,
-  review_count,
-  category,
-  rating,
-  coordinates,
-  address,
-  phone,
-  index,
-  setSelectedRestaurant,
-}) {
+export default function PlaceCard({ business, setSelectedRestaurant }) {
+  const renderBusinessHours = () => {
+    if (business.hours) {
+      return (
+        <Grid item xs={12}>
+          <Typography variant="body2" color="text.secondary">
+            Hours:{" "}
+            {business.hours[0].open.map((hour) => (
+              <span
+                key={hour.day}
+              >{`${hour.day}: ${hour.start}-${hour.end}`}</span>
+            ))}
+          </Typography>
+        </Grid>
+      );
+    }
+    return null;
+  };
+
   return (
-    <div className="card" onClick={() => setSelectedRestaurant(index)}>
-      <div className="card-img">
-        <img src={image} alt="place image" className="holder" />
-      </div>
-      <div className="card-body">
-        <ul>
-          <li>
-            <h5>{name}</h5>
-          </li>
-          <li>
-            <div className="rating">
-              <span className="space">{rating}</span>
-              <DynamicStar
-                width={12}
-                height={12}
-                rating={rating}
-                emptyStarColor={"#D3D3D3"}
-              />
-              ({review_count})
-            </div>
-          </li>
-          <li>{address}</li>
-          <li>{phone}</li>
-        </ul>
-      </div>
-    </div>
-  )
+    <Box p={2} bgcolor="#00ACD5" borderRadius={5}>
+      <Card sx={{ display: "flex", maxWidth: "50vw" }}>
+        <CardMedia
+          component="img"
+          height="250"
+          image={business.image_url}
+          alt={business.name}
+          sx={{ width: "50%" }}
+        />
+        <CardContent sx={{ flex: 1 }}>
+          <Grid container spacing={1}>
+            <Grid item xs={12}>
+              <Typography gutterBottom variant="h5" component="div">
+                {business.name}
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="body2" color="text.secondary">
+                {business.categories
+                  .map((category) => category.title)
+                  .join(", ")}
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="body2" color="text.secondary">
+                Rating:{" "}
+                <DynamicStar
+                  width={20}
+                  height={20}
+                  rating={business.rating}
+                  emptyStarColor="#D3D3D3"
+                  filledStarColor="#FFD700"
+                />
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="body2" color="text.secondary">
+                Reviews: {business.review_count}
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="body2" color="text.secondary">
+                Address: {business.location.display_address.join(", ")}
+              </Typography>
+            </Grid>
+            {renderBusinessHours()}
+            <Grid item xs={12}>
+              <Button size="small" color="primary" href={business.url}>
+                Visit Yelp Page
+              </Button>
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
+    </Box>
+  );
 }
