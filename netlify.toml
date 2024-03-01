@@ -12,8 +12,14 @@
     [headers.values]
       Access-Control-Allow-Origin = "*"
 
-[[functions]]
+[functions]
+  external_node_modules = [
+    "module-one",
+    "module-two"
+  ]
+
+  [[functions]]
   path = "functions/location.js"
 
-[[functions]]
+  [[functions]]
   path = "functions/popular-restaurants.js"
