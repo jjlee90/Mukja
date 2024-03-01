@@ -18,8 +18,8 @@
     "module-two"
   ]
 
-  [[functions]]
+[[functions]]
   path = "functions/location.js"
 
-  [[functions]]
+[[functions]]
   path = "functions/popular-restaurants.js"
