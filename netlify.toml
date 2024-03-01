@@ -1,6 +1,8 @@
 [build]
-  command = "npm run build"
+  command = "npm install && npm run build"
   publish = "build/"  
+  functions = "functions/"
+  
 
 [[redirects]]
   from = "/*"
@@ -12,5 +14,5 @@
     [headers.values]
       Access-Control-Allow-Origin = "*"
 
-[[plugins]]    
-  package = "@netlify/plugin-functions-install-core"
+
+
