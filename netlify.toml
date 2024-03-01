@@ -1,6 +1,7 @@
 [build]
   command = "npm --prefix client run build"
   publish = "mukja/client/build/"
+  functions = "mukja/functions"
 
 [[redirects]]
   from = "/*"
@@ -12,14 +13,3 @@
     [headers.values]
       Access-Control-Allow-Origin = "*"
 
-[functions]
-  external_node_modules = [
-    "module-one",
-    "module-two"
-  ]
-
-[[functions]]
-  path = "functions/location.js"
-
-[[functions]]
-  path = "functions/popular-restaurants.js"
