@@ -18,7 +18,6 @@ app.use(methodOverride("_method"));
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static("../client/build"));
 
 const db = require("./models/index.db");
 
@@ -36,14 +35,11 @@ require("./routes/review.routes")(app);
 app.use("/api/users", require("./routes/userRoutes"));
 
 app.get("/*", function (req, res) {
-  res.sendFile(
-    path.join(__dirname, "../client/build/index.html"),
-    function (err) {
-      if (err) {
-        res.status(500).send(err);
-      }
+  res.sendFile(path.join(buildPath, "index.html"), function (err) {
+    if (err) {
+      res.status(500).send(err);
     }
-  );
+  });
 });
 
 app.listen(PORT, () => {
