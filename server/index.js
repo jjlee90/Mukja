@@ -34,6 +34,18 @@ app.use("/api", apiController);
 require("./routes/review.routes")(app);
 
 app.use("/api/users", require("./routes/userRoutes"));
+
+app.get("/*", function (req, res) {
+  res.sendFile(
+    path.join(__dirname, "../client/build/index.html"),
+    function (err) {
+      if (err) {
+        res.status(500).send(err);
+      }
+    }
+  );
+});
+
 app.listen(PORT, () => {
   console.log(`Server is rockin' on port ${PORT}`);
 });
