@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === "development") {
   // baseURL = "/.client/functions";
 } else {
   // Running on Netlify
-  baseURL = "https://mukja.netlify.app/api"; //"https://mukja.netlify.app/.netlify/functions";
+  baseURL = "http://ec2-18-209-7-174.compute-1.amazonaws.com/api"; //"https://mukja.netlify.app/api"; //"https://mukja.netlify.app/.netlify/functions";
 }
 
 const api = axios.create({

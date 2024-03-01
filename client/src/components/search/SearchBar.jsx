@@ -26,10 +26,7 @@ export default function SearchBar(props) {
     e.preventDefault();
     const data = { ...formData };
 
-    let rest = await api.post(
-      "http://ec2-18-209-7-174.compute-1.amazonaws.com:8080/api/location",
-      data
-    );
+    let rest = await api.post("/location", data);
 
     let results = await rest.data;
 
