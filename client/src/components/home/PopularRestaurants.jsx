@@ -42,13 +42,14 @@ const Rating = ({ value }) => {
 };
 export default function PopularRestaurants() {
   const [restaurants, setRestaurants] = useState([]);
-  console.log(restaurants);
 
   useEffect(() => {
     const fetchRestaurants = async () => {
       try {
-        // const data = await fetchPopularRestaurants();
-        const data = mockRestaurantData;
+        const data =
+          process.env.NODE_ENV === "development"
+            ? mockRestaurantData
+            : await fetchPopularRestaurants();
         setRestaurants(data);
       } catch (error) {
         console.error(error);

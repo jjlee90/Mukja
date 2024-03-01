@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { TextField, Button, Grid } from "@mui/material";
 import { AiOutlineSearch } from "react-icons/ai";
 import logo from "../../images/mukjaLogo.png";
+import api from "../../services/api";
 
 export default function SearchBar(props) {
   const navigate = useNavigate();
@@ -22,17 +23,11 @@ export default function SearchBar(props) {
 
   async function handleClick(e) {
     e.preventDefault();
-
     const data = { ...formData };
 
-    let rest = await fetch("http://localhost:3001/api/location", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    let results = await rest.json();
+    let rest = await api.post("/location", data);
+
+    let results = await rest.data;
 
     props.setData(results.businesses);
     props.setDefaultCenter(results.region.center);
@@ -40,13 +35,7 @@ export default function SearchBar(props) {
   }
 
   return (
-    <Grid
-      container
-      alignItems="center"
-      sx={{ outline: "none" }}
-      // spacing={2}
-      // style={{ backgroundColor: "#00ACD5" }}
-    >
+    <Grid container alignItems="center" sx={{ outline: "none" }}>
       <Grid item xs={12} sm={6} md={4} lg={3} sx={{ outline: "none" }}>
         <img
           src={logo}

@@ -1,0 +1,17 @@
+[build]
+  command = "npm --prefix client run build"
+  publish = "client/build/"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+    [headers.values]
+      Access-Control-Allow-Origin = "*"
+
+[[functions]]
+path = "functions/location.js"
+path = "functions/popular-restaurants.js"

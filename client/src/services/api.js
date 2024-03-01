@@ -1,9 +1,17 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:3001/api";
+let baseURL;
+
+if (process.env.NODE_ENV === "development") {
+  // Running locally
+  baseURL = "http://localhost:3001/api";
+} else {
+  // Running on Netlify
+  baseURL = "/.netlify/functions";
+}
 
 const api = axios.create({
-  baseURL: BASE_URL,
+  baseURL: baseURL,
   headers: {
     "Content-type": "application/json",
   },
