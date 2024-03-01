@@ -1,12 +1,12 @@
 [build]
   command = "npm install && npm run build"
   publish = "build/"  
-  functions = "functions/"
+  functions = "client/functions/"
   
 
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/.client/functions/:splat"
   status = 200
 
 [[headers]]
