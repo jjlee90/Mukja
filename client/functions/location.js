@@ -1,6 +1,6 @@
-const fetch = require("node-fetch");
+import fetch from "node-fetch";
 
-exports.handler = async function (event, context) {
+export async function handler(event, context) {
   const { search = "food", location, results = "10" } = JSON.parse(event.body);
 
   if (!location) {
@@ -30,4 +30,4 @@ exports.handler = async function (event, context) {
       body: JSON.stringify({ error: "Internal Server Error" }),
     };
   }
-};
+}
