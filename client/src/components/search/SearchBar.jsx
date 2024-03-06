@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { TextField, Button, Grid } from "@mui/material";
 import { AiOutlineSearch } from "react-icons/ai";
 import logo from "../../images/mukjaLogo.png";
-import api from "../../services/api";
-import axios from "axios";
+import { fetchLocation } from "../../services/restaurants.js";
 
 export default function SearchBar(props) {
   const navigate = useNavigate();
@@ -26,13 +25,19 @@ export default function SearchBar(props) {
     e.preventDefault();
     const data = { ...formData };
 
-    let rest = await api.post("/location", data);
+    let rest = await fetchLocation(data);
 
     let results = await rest.data;
 
-    props.setData(results.businesses);
-    props.setDefaultCenter(results.region.center);
+    props.setTotalPlaces(results?.total);
+    props.setData(results?.businesses);
+    props.setDefaultCenter(results?.region.center);
     navigate("/places");
+
+    setFormData({
+      search: "",
+      location: "",
+    });
   }
 
   return (

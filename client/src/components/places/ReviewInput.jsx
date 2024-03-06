@@ -1,12 +1,11 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 
 // create pop ups. used for leave a review button
-import Popup from "reactjs-popup"
-import "reactjs-popup/dist/index.css"
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
 
 // display fraction of a star based on number value
-import { DynamicStar } from "react-dynamic-star"
-import "./places.scss"
+import { DynamicStar } from "react-dynamic-star";
 
 export default function ReviewInput({ name, address, setCreateReview }) {
   // input fields for post request /api/reviews
@@ -14,36 +13,39 @@ export default function ReviewInput({ name, address, setCreateReview }) {
     content: "",
     rating: null,
     address: address,
-  })
+  });
 
   // event handler to handle changes input fields
   function handleChange(e) {
-    e.preventDefault()
+    e.preventDefault();
     setFormInput((prevFormData) => {
-      return { ...prevFormData, [e.target.name]: e.target.value }
-    })
+      return { ...prevFormData, [e.target.name]: e.target.value };
+    });
   }
 
   async function handleClick(e) {
-    e.preventDefault()
-    const id = JSON.parse(await localStorage.getItem("user"))._id
-    const name = JSON.parse(await localStorage.getItem("user")).firstName
-    const data = { ...formInput, user_id: id, firstName: name }
-    console.log(name)
+    e.preventDefault();
+    const id = JSON.parse(await localStorage.getItem("user"))._id;
+    const name = JSON.parse(await localStorage.getItem("user")).firstName;
+    const data = { ...formInput, user_id: id, firstName: name };
+    console.log(name);
 
     // post request, create review with form data
-    let rest = await fetch("http://ec2-52-206-211-87.compute-1.amazonaws.com/api/reviews", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-    let results = await rest.json()
-    console.log(results)
-    console.log(id)
+    let rest = await fetch(
+      "http://ec2-52-206-211-87.compute-1.amazonaws.com/api/reviews",
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
+    let results = await rest.json();
+    console.log(results);
+    console.log(id);
     // passing results to  ./PlaceReview.jsx
-    setCreateReview(results)
+    setCreateReview(results);
   }
 
   return (
@@ -85,7 +87,7 @@ export default function ReviewInput({ name, address, setCreateReview }) {
                 <button
                   className="button"
                   onClick={() => {
-                    close()
+                    close();
                   }}
                 >
                   Post
@@ -96,5 +98,5 @@ export default function ReviewInput({ name, address, setCreateReview }) {
         )}
       </Popup>
     </div>
-  )
+  );
 }

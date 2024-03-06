@@ -78,7 +78,13 @@ export default function PlaceCard({ business, setSelectedRestaurant }) {
             </Grid>
             {renderBusinessHours()}
             <Grid item xs={12}>
-              <Button size="small" color="primary" href={business.url}>
+              <Button
+                size="small"
+                color="primary"
+                href={business.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 Visit Yelp Page
               </Button>
             </Grid>

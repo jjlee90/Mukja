@@ -14,6 +14,7 @@ function App() {
   // Place data from yelp fetched from ./components/search
   // pass data and center to ./components/places/Places
   const [data, setData] = useState([]);
+  const [totalPlaces, setTotalPlaces] = useState(0);
 
   // setting center using fetched data
   const [defaultCenter, setDefaultCenter] = useState([]);
@@ -25,14 +26,27 @@ function App() {
         backgroundColor: "#00ACD5",
       }}
     >
-      <SearchBar setData={setData} setDefaultCenter={setDefaultCenter} />
+      <SearchBar
+        setTotalPlaces={setTotalPlaces}
+        setData={setData}
+        setDefaultCenter={setDefaultCenter}
+      />
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} /> */}
         <Route
           path="/places"
-          element={<Places data={data} defaultCenter={defaultCenter} />}
+          element={
+            <Places
+              totalPlaces={totalPlaces}
+              data={data}
+              defaultCenter={defaultCenter}
+              setTotalPlaces={setTotalPlaces}
+              setData={setData}
+              setDefaultCenter={setDefaultCenter}
+            />
+          }
         />
       </Routes>
       <ToastContainer />

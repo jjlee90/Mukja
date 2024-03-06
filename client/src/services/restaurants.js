@@ -4,11 +4,19 @@ export async function fetchLocation(data) {
   try {
     const response = await api.post("/location", data);
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch data");
-    }
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Internal Server Error");
+  }
+}
 
-    return response.data;
+// next page
+export async function fetchNextPage(zip, page) {
+  try {
+    const response = await api.post("/location/nextPage", { zip, page });
+
+    return response?.data;
   } catch (error) {
     console.error(error);
     throw new Error("Internal Server Error");
