@@ -26,12 +26,7 @@ export async function fetchNextPage(zip, page) {
 export async function fetchPopularRestaurants() {
   try {
     const response = await api.get("/popular-restaurants");
-
-    if (response.status === 200) {
-      return response.data;
-    } else {
-      throw new Error("Failed to fetch restaurants");
-    }
+    return response?.data;
   } catch (error) {
     console.error(error);
     throw new Error("Internal Server Error");

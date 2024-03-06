@@ -48,9 +48,10 @@ export default function PopularRestaurants() {
       try {
         // const data = mockRestaurantData;
         const data =
-          process.env.NODE_ENV === "development"
+          process.env.NODE_ENV === "local"
             ? mockRestaurantData
             : await fetchPopularRestaurants();
+
         setRestaurants(data);
       } catch (error) {
         console.error(error);

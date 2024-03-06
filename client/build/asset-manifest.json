@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/static/css/main.db45bec7.css",
-    "main.js": "/static/js/main.bb742b75.js",
+    "main.js": "/static/js/main.448e23e3.js",
     "static/media/restaurantHeaderBg.jpg": "/static/media/restaurantHeaderBg.63dc82e7d076a950a60f.jpg",
     "static/media/mukjaLogo.png": "/static/media/mukjaLogo.3d69e597e9221027f0e4.png",
     "index.html": "/index.html",
     "main.db45bec7.css.map": "/static/css/main.db45bec7.css.map",
-    "main.bb742b75.js.map": "/static/js/main.bb742b75.js.map"
+    "main.448e23e3.js.map": "/static/js/main.448e23e3.js.map"
   },
   "entrypoints": [
     "static/css/main.db45bec7.css",
-    "static/js/main.bb742b75.js"
+    "static/js/main.448e23e3.js"
   ]
 }
