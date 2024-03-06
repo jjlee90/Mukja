@@ -85,35 +85,36 @@ export default function PopularRestaurants() {
             justifyContent: "center",
           }}
         >
-          {restaurants?.map((restaurant, index) => (
-            <Card key={index} style={{ width: 200, margin: 10 }}>
-              <CardMedia
-                component="img"
-                height="100"
-                image={restaurant.image_url}
-                alt={restaurant.name}
-                style={{ objectFit: "cover", borderRadius: 8 }}
-              />
-              <CardContent>
-                <Typography
-                  variant="h6"
-                  component="div"
-                  style={{
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                    maxWidth: "100%",
-                  }}
-                >
-                  {restaurant.name}
-                </Typography>
-                <Rating name="read-only" value={restaurant.rating} readOnly />
-              </CardContent>
-              {/* <CardActions style={{ justifyContent: "center" }}>
+          {restaurants?.length > 0 &&
+            restaurants?.map((restaurant, index) => (
+              <Card key={index} style={{ width: 200, margin: 10 }}>
+                <CardMedia
+                  component="img"
+                  height="100"
+                  image={restaurant.image_url}
+                  alt={restaurant.name}
+                  style={{ objectFit: "cover", borderRadius: 8 }}
+                />
+                <CardContent>
+                  <Typography
+                    variant="h6"
+                    component="div"
+                    style={{
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                      maxWidth: "100%",
+                    }}
+                  >
+                    {restaurant.name}
+                  </Typography>
+                  <Rating name="read-only" value={restaurant.rating} readOnly />
+                </CardContent>
+                {/* <CardActions style={{ justifyContent: "center" }}>
                   <Button size="small">Learn More</Button>
                 </CardActions> */}
-            </Card>
-          ))}
+              </Card>
+            ))}
         </div>
       </Grid>
     </Grid>
