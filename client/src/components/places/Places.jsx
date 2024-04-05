@@ -1,43 +1,38 @@
-import { useState, useEffect } from "react"
-import Map from "./Map"
-import Loader from "../loader/Loader"
-import PlaceCard from "./PlacesCard"
-import PlaceReview from "./PlaceReview"
-import Popup from "reactjs-popup"
-import "reactjs-popup/dist/index.css"
+import { useState, useEffect } from "react";
+import Map from "./Map";
+import Loader from "../loader/Loader";
+import PlaceCard from "./PlacesCard";
+import PlaceReview from "./PlaceReview";
+import Popup from "reactjs-popup";
+import { Typography, Grid, Button } from "@mui/material";
+import "reactjs-popup/dist/index.css";
+import { fetchNextPage, fetchLocation } from "../../services/restaurants";
+
 export default function Places(props) {
   // usestate to set fetched food data
 
   // set food data from ../search/SearchBar
-  const [foodData, setFoodData] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [foodData, setFoodData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   // track PlaceCard on click based on index e.g. foodData[0]
-  const [selectedRestaurant, setSelectedRestaurant] = useState(0)
-
-  // center point used to render map
+  const [selectedRestaurant, setSelectedRestaurant] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
 
   // setting data from SearchBar
   useEffect(() => {
-    setFoodData(props.data)
-    // setDefaultcenter(props.defaultCenter)
-  })
+    setFoodData(props?.data);
+  }, [props?.data]);
 
-  // map data to create PlaceCards. Used as trigger to Popup ./PlaceReview.jsx
-  let mapData = foodData.map((place, index) => {
+  let mapData = foodData?.map((place, index) => {
     return (
       <PlaceCard
         key={place.id}
-        name={place.name}
-        rating={place.rating}
-        review_count={place.review_count}
-        image={place.image_url}
-        address={place.location.address1}
-        index={index}
+        business={place}
         setSelectedRestaurant={setSelectedRestaurant}
       />
-    )
-  })
+    );
+  });
 
   function mapReview() {
     return (
@@ -54,32 +49,72 @@ export default function Places(props) {
         address={foodData[selectedRestaurant].location.address1}
         phone={foodData[selectedRestaurant].display_phone}
       />
-    )
+    );
   }
 
+  const totalPages = 5; //Math.ceil(props?.totalPlaces / itemsPerPage);
+
+  const handlePageChange = async (pageNumber) => {
+    try {
+      setCurrentPage(pageNumber);
+      const result = await fetchNextPage(
+        props?.data[0]?.location.zip_code,
+        pageNumber
+      );
+
+      setFoodData(result.businesses);
+      props.setData(result.businesses);
+      props.setDefaultCenter(result.region.center);
+
+      // Scroll to the top of the page
+      window.scrollTo({ top: 0, behavior: "instant" });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <div className="container">
-      <h3>Places</h3>
-      <div className="places-container">
-        <div className="card-container">
-          <Popup
-            trigger={
-              <div id="growth">{foodData.length !== 0 ? mapData : ""}</div>
-            }
-            modal
-            nested
-          >
-            <div className="rev-cont">{foodData.length > 0 && mapReview()}</div>
-          </Popup>
-        </div>
-        <div className="map-container">
+    <Grid container mt={2}>
+      <Typography
+        variant="h3"
+        gutterBottom
+        color={"white"}
+        sx={{ marginLeft: 2 }}
+      >
+        {foodData[0]?.location.city}, {foodData[0]?.location.state}
+      </Typography>
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={6} md={6}>
+          {foodData.map((place) => (
+            <PlaceCard
+              key={place.id}
+              business={place}
+              setSelectedRestaurant={setSelectedRestaurant}
+            />
+          ))}
+
+          <Grid container spacing={1} justifyContent="center">
+            {Array.from({ length: totalPages }, (_, i) => (
+              <Grid item key={i}>
+                <Button
+                  sx={{ background: "white" }}
+                  onClick={() => handlePageChange(i + 1)}
+                  variant={currentPage === i + 1 ? "contained" : "outlined"}
+                >
+                  <Typography>{i + 1}</Typography>
+                </Button>
+              </Grid>
+            ))}
+          </Grid>
+        </Grid>
+        <Grid item xs={12} sm={6} md={6}>
           {foodData.length !== 0 ? (
             <Map foodData={foodData} defaultCenter={props.defaultCenter} />
           ) : (
             <Loader />
           )}
-        </div>
-      </div>
-    </div>
-  )
+        </Grid>
+      </Grid>
+    </Grid>
+  );
 }

@@ -1,32 +1,36 @@
-const express = require("express")
-const app = express()
-const cors = require("cors")
+import express from "express";
+import cors from "cors";
+import routes from "./routes/index.js";
+import bodyParser from "body-parser";
+import methodOverride from "method-override";
+import dotenv from "dotenv";
+import path from "path";
+dotenv.config();
 
-const bodyParser = require("body-parser")
-const methodOverride = require("method-override")
-require("dotenv").config()
-const PORT = process.env.PORT
+const app = express();
+const PORT = process.env.PORT;
+const _dirname = path.dirname("");
+const buildPath = path.join(_dirname, "../client/build");
 
-app.use(methodOverride("_method"))
+app.use(express.static(buildPath));
+app.use(methodOverride("_method"));
+app.use(bodyParser.json());
+app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-app.use(express.urlencoded({ extended: true }))
-app.use(express.json())
-app.use(express.static("../client/build"))
+// const db = require("./models/index.db");
 
-const db = require("./models/index.db")
+app.use("/api", routes);
 
-db.sequelize
-  .sync() // {force: false} delete force obj after dev. it drops all tables then recreates them.
-  .then(() => {})
-  .catch((err) => {
-    console.log("Couldn't sync db: " + err.message)
-  })
+app.get("/*", function (req, res) {
+  res.sendFile(path.resolve(buildPath, "index.html"), function (err) {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
 
-const apiController = require("./controllers/api_controller.js")
-app.use("/api", apiController)
-require("./routes/review.routes")(app)
-
-app.use("/api/users", require("./routes/userRoutes"))
 app.listen(PORT, () => {
-  console.log(`Server is rockin' on port ${PORT}`)
-})
+  console.log(`Server is rockin' on port ${PORT}`);
+});

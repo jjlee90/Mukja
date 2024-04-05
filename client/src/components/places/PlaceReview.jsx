@@ -1,11 +1,10 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 
 // display fraction of a star based on number value
-import { DynamicStar } from "react-dynamic-star"
-import "./places.scss"
+import { DynamicStar } from "react-dynamic-star";
 
 // pop up when clicking leave a review btn. Click place card to reveal button
-import ReviewInput from "./ReviewInput"
+import ReviewInput from "./ReviewInput";
 
 export default function PlaceReview({
   image,
@@ -22,10 +21,10 @@ export default function PlaceReview({
   phone,
 }) {
   // POST results passed from ./ReviewInput.jsx to renderReview()
-  const [createReview, setCreateReview] = useState({})
+  const [createReview, setCreateReview] = useState({});
 
   function renderReview() {
-    console.log(createReview)
+    console.log(createReview);
     return (
       <div>
         <hr />
@@ -34,7 +33,7 @@ export default function PlaceReview({
         <p>{createReview.content}</p>
         <hr />
       </div>
-    )
+    );
   }
   return (
     <div className="reviews">
@@ -73,5 +72,5 @@ export default function PlaceReview({
         {createReview.content !== "" ? renderReview() : ""}
       </div>
     </div>
-  )
+  );
 }

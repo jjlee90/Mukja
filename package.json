@@ -1,0 +1,23 @@
+{
+  "name": "mukja",
+  "version": "1.0.0",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jjlee90/Mukja.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jjlee90/Mukja/issues"
+  },
+  "homepage": "https://github.com/jjlee90/Mukja#readme",
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
+}
