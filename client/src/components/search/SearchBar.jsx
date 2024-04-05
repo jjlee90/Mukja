@@ -42,11 +42,24 @@ export default function SearchBar(props) {
 
   return (
     <Grid container alignItems="center" sx={{ outline: "none" }}>
-      <Grid item xs={12} sm={6} md={4} lg={3} sx={{ outline: "none" }}>
+      <Grid
+        container
+        item
+        xs={12}
+        sm={6}
+        md={4}
+        lg={3}
+        sx={{ outline: "none" }}
+      >
         <img
           src={logo}
           alt="logo"
-          style={{ cursor: "pointer", outline: "none" }}
+          style={{
+            cursor: "pointer",
+            outline: "none",
+            maxWidth: "100%",
+            height: "auto",
+          }}
           onClick={() => navigate("/")}
         />
       </Grid>

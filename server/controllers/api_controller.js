@@ -16,10 +16,6 @@ export const mostPopularRestaurants = async (req, res) => {
   const limit = 10; // Number of results per page
   const offset = (page - 1) * limit; // Calculate the offset
 
-  console.log("Search term:", search);
-  console.log("Location:", location);
-  console.log("Page:", page);
-
   async function getRestaurants() {
     let response = await fetch(
       `https://api.yelp.com/v3/businesses/search?term=${search}&location=${
@@ -32,7 +28,7 @@ export const mostPopularRestaurants = async (req, res) => {
       }
     );
     let data = await response.json();
-    console.log(data);
+
     return res.status(200).json(data);
   }
 
@@ -61,10 +57,6 @@ export const nextPage = async (req, res) => {
   const limit = 10; // Number of results per page
   const offset = (page - 1) * limit; // Calculate the offset
 
-  console.log("Search term:", search);
-  console.log("Zip:", zip);
-  console.log("Page:", page);
-
   async function getRestaurants() {
     let response = await fetch(
       `https://api.yelp.com/v3/businesses/search?term=${search}&location=${zip}&limit=${limit}&offset=${offset}`,
@@ -75,7 +67,7 @@ export const nextPage = async (req, res) => {
       }
     );
     let data = await response.json();
-    console.log(data);
+
     return res.status(200).json(data);
   }
 
